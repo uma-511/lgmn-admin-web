@@ -9,10 +9,10 @@
             @on-delete="remove"
             @on-detail="detail"
             @on-add-click="add"
-            :addable="true"
+            :addable="false"
             :searchable="true"
             :searchForm="searchForm"
-            dataUrl='system/user'
+            dataUrl='labelRecordApi/page'
             size='small'
             :height='tableHeight'></tables>
     <DynamicForm v-bind:value='addModel'
@@ -31,10 +31,10 @@
 import { clone } from '@/libs/tools'
 import Tables from '_c/tables'
 import DynamicForm from '_c/dynamic-form'
-import addForm from './form/add-LabelRecord-form'
-import editForm from './form/edit-LabelRecord-form'
-import detailForm from './form/detail-LabelRecord-form'
-import searchFormData from './form/search-LabelRecord-form'
+import addForm from './form/add-labelRecord-form'
+import editForm from './form/edit-labelRecord-form'
+import detailForm from './form/detail-labelRecord-form'
+import searchFormData from './form/search-labelRecord-form'
 export default {
   components: {
     Tables,
@@ -45,10 +45,10 @@ export default {
     return {
       addModel: false,
       formData: [],
-      createUrl: 'create.lgmn.com',
-      updateUrl: 'update.lgmn.com',
-      deleteUrl: 'delete.lgmn.com',
-      detailUrl: 'detail.lgmn.com',
+      createUrl: 'labelRecordApi/add',
+      updateUrl: 'labelRecordApi/update',
+      deleteUrl: 'labelRecordApi/delete',
+      detailUrl: 'labelRecordApi/detail',
       currentId: '',
       formStatus: 'add',
       tableData: [],
@@ -62,94 +62,81 @@ export default {
           type: 'index',
           width: 70,
           align: 'center'
-        }
-        , {
-          title: '${column.comment}',
-          key: 'id'
-        }
-        , {
+        // }, {
+        //   title: '${column.comment}',
+        //   key: 'id'
+        }, {
           title: '存货编码',
           key: 'labelNum'
-        }
-        , {
+        }, {
           title: '包号',
           key: 'packId'
-        }
-        , {
+        }, {
           title: '订单号',
           key: 'orderId'
-        }
-        , {
+        }, {
           title: '产品id',
           key: 'prodId'
-        }
-        , {
+        }, {
           title: '型号id',
           key: 'modelId'
-        }
-        , {
+        }, {
           title: '存储状态',
           key: 'status'
-        }
-        , {
+        }, {
           title: '生产日期',
-          key: 'prodTime'
-        }
-        , {
-          title: '入库日期',
-          key: 'inTime'
-        }
-        , {
-          title: '出库日期',
-          key: 'outTime'
-        }
-        , {
-          title: '作废日期',
-          key: 'invalidTime'
-        }
-        , {
-          title: '标签类型：0：产品标签 1：打包标签',
-          key: 'labelType'
-        }
-        , {
-          title: '净重',
-          key: 'netWeight'
-        }
-        , {
-          title: '毛重',
-          key: 'grossWeight'
-        }
-        , {
-          title: '皮重',
-          key: 'skinWeight'
-        }
-        , {
-          title: '生产人id',
-          key: 'prodUser'
-        }
-        , {
-          title: '入库人id',
-          key: 'inUser'
-        }
-        , {
-          title: '出库人id',
-          key: 'outUser'
-        }
-        , {
-          title: '作废人id',
-          key: 'invalidUser'
-        }
-        , {
-          title: '记录类型 0：生成 1：导入',
-          key: 'recordType'
-        }
-        , {
+          key: 'prodTime',
+          render: (h, { row }) => {
+            return h('Time', {
+              props: {
+                time: parseInt(row.prodTime),
+                type: 'datetime'
+              }
+            })
+          }
+        // }, {
+        //   title: '入库日期',
+        //   key: 'inTime'
+        // }, {
+        //   title: '出库日期',
+        //   key: 'outTime'
+        // }, {
+        //   title: '作废日期',
+        //   key: 'invalidTime'
+        // }, {
+        //   title: '标签类型：0：产品标签 1：打包标签',
+        //   key: 'labelType'
+        // }, {
+        //   title: '净重',
+        //   key: 'netWeight'
+        // }, {
+        //   title: '毛重',
+        //   key: 'grossWeight'
+        // }, {
+        //   title: '皮重',
+        //   key: 'skinWeight'
+        // }, {
+        //   title: '生产人id',
+        //   key: 'prodUser'
+        // }, {
+        //   title: '入库人id',
+        //   key: 'inUser'
+        // }, {
+        //   title: '出库人id',
+        //   key: 'outUser'
+        // }, {
+        //   title: '作废人id',
+        //   key: 'invalidUser'
+        // }, {
+        //   title: '记录类型 0：生成 1：导入',
+        //   key: 'recordType'
+        }, {
           key: 'handle',
           renderHeader (h, { column, index }) {
             return h('span', vue.$t('option'))
           },
           width: 200,
-          options: ['delete', 'edit', 'detail']
+          options: ['detail']
         }
       ]
     }
@@ -172,6 +159,7 @@ export default {
       this.addModel = true
       this.formData = _f
       this.formStatus = 'detail'
+      this.currentId = item.row.id + ''
     },
     async remove (item) {
     },

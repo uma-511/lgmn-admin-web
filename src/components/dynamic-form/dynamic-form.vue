@@ -1,8 +1,11 @@
 <template>
   <div>
     <Drawer :title="$t(status)"
+            style="z-index: 999"
             v-model="showStatus"
             :width="width"
+            :transfer="transfer"
+            :inner="inner"
             :mask-closable="false"
             :styles="styles">
       <!-- <Form ref="formDynamic"
@@ -47,6 +50,7 @@
 <script>
 import DynamicItem from './item'
 import { PostWithAuth } from '@/api/global'
+
 export default {
   components: {
     DynamicItem
@@ -68,7 +72,8 @@ export default {
       option: {
         submitBtn: false
       },
-      first: true
+      first: true,
+      gettingDetail: false
     }
   },
   props: {
@@ -79,6 +84,14 @@ export default {
       }
     },
     value: Boolean,
+    transfer: {
+      type: Boolean,
+      default: true
+    },
+    inner: {
+      type: Boolean,
+      default: false
+    },
     formData: Array,
     width: Number,
     createUrl: {
@@ -101,13 +114,17 @@ export default {
   watch: {
     value (val) {
       this.showStatus = val
-    },
-    status (val) {
-      if ((val === 'edit' || val === 'detail') && !this.first) {
+      if ((this.status === 'edit' || this.status === 'detail') && val && !this.first) {
+        this.id = this.currentId
         this.getDetail()
       } else {
         this.first = false
       }
+    },
+    status (val) {
+      // if ((val === 'edit' || val === 'detail') && !this.first) {
+      //   this.getDetail()
+      // }
     },
     formData (val) {
       const _d = val
@@ -154,6 +171,7 @@ export default {
         PostWithAuth(this.createUrl, formData).then(res => {
           if (res.data.code === '200') {
             this.$Message.success('添加成功')
+            this.$emit('on-submit-success')
           } else {
             if (res.data.code === '205') {
               this.$Message.error('此号码已存在，请确认')
@@ -170,6 +188,7 @@ export default {
         PostWithAuth(this.updateUrl, formData).then(res => {
           if (res.data.code === '200') {
             this.$Message.success('修改成功')
+            this.$emit('on-submit-success')
           } else {
             if (res.data.code === '205') {
               this.$Message.error('修改失败')
@@ -183,17 +202,21 @@ export default {
     },
     getDetail () {
       if (this.detailUrl !== '') {
-        PostWithAuth(this.detailUrl + '/' + this.id, {}).then(res => {
-          if (res.data.code === '200') {
-            this.fApi.setValue(res.data.data)
-            this.$Message.success('获取表单数据成功')
-          } else {
-            if (res.data.code === '205') {
-              this.$Message.error('获取表单数据失败')
-              this.showStatus = false
+        if (!this.gettingDetail) {
+          this.gettingDetail = true
+          PostWithAuth(this.detailUrl + '/' + this.id, {}).then(res => {
+            if (res.data.code === '200') {
+              this.fApi.setValue(res.data.data)
+              this.$Message.success('获取表单数据成功')
+            } else {
+              if (res.data.code === '205') {
+                this.$Message.error('获取表单数据失败')
+                this.showStatus = false
+              }
             }
-          }
-        })
+            this.gettingDetail = false
+          })
+        }
       } else {
         console.error('请提供detailUrl')
       }

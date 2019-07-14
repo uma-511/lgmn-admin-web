@@ -283,7 +283,7 @@ export default {
       let _postData = this.postData
       form.fApi.submit((formData) => {
         Object.assign(_postData, formData)
-        this.getData(_postData)
+        this.getData()
       })
     },
     handleTableData () {
@@ -341,7 +341,11 @@ export default {
       this.postData.pageSize = pageSize
       this.getData()
     },
-    getData () {
+    getData (data) {
+      if (data) {
+        let _postData = this.postData
+        Object.assign(_postData, data)
+      }
       if (this.postData) {
         PostWithAuth(this.dataUrl, this.postData).then(res => {
           if (res) {

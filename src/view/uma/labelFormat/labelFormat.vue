@@ -2,6 +2,7 @@
   <Card>
     <tables border
             editable
+            ref="table"
             search-place="top"
             :columns='columns'
             v-model='tableData'
@@ -12,7 +13,7 @@
             :addable="true"
             :searchable="true"
             :searchForm="searchForm"
-            dataUrl='system/user'
+            dataUrl='labelFormatApi/page'
             size='small'
             :height='tableHeight'></tables>
     <DynamicForm v-bind:value='addModel'
@@ -24,31 +25,36 @@
                  :detailUrl='detailUrl'
                  :currentId='currentId'
                  @on-value-change="onshowStatusChange"></DynamicForm>
+    <AddLabelFormat :value="showStatus" @on-showStatus-change="onMyShowStatusChange" @on-added="onAdded"></AddLabelFormat>
   </Card>
 </template>
 
 <script>
 import { clone } from '@/libs/tools'
+import { PostWithAuth } from '@/api/global'
 import Tables from '_c/tables'
 import DynamicForm from '_c/dynamic-form'
-import addForm from './form/add-LabelFormat-form'
-import editForm from './form/edit-LabelFormat-form'
-import detailForm from './form/detail-LabelFormat-form'
-import searchFormData from './form/search-LabelFormat-form'
+// import addForm from './form/add-labelFormat-form'
+import editForm from './form/edit-labelFormat-form'
+import detailForm from './form/detail-labelFormat-form'
+import searchFormData from './form/search-labelFormat-form'
+import AddLabelFormat from './addLabelFormat'
 export default {
   components: {
     Tables,
-    DynamicForm
+    DynamicForm,
+    AddLabelFormat
   },
   data () {
     var vue = this
     return {
       addModel: false,
+      showStatus: false,
       formData: [],
-      createUrl: 'create.lgmn.com',
-      updateUrl: 'update.lgmn.com',
-      deleteUrl: 'delete.lgmn.com',
-      detailUrl: 'detail.lgmn.com',
+      createUrl: 'labelFormatApi/add',
+      updateUrl: 'labelFormatApi/update',
+      deleteUrl: 'labelFormatApi/delete',
+      detailUrl: 'labelFormatApi/detail',
       currentId: '',
       formStatus: 'add',
       tableData: [],
@@ -62,32 +68,29 @@ export default {
           type: 'index',
           width: 70,
           align: 'center'
-        }
-        , {
-          title: '${column.comment}',
+        }, {
+          title: 'ID',
           key: 'id'
-        }
-        , {
-          title: '${column.comment}',
+        }, {
+          title: '标签名称',
           key: 'name'
-        }
-        , {
+        }, {
+          title: '模板路径',
+          key: 'path'
+        }, {
           key: 'handle',
           renderHeader (h, { column, index }) {
             return h('span', vue.$t('option'))
           },
           width: 200,
-          options: ['delete', 'edit', 'detail']
+          options: ['delete']
         }
       ]
     }
   },
   methods: {
     async add () {
-      const _f = clone(addForm)
-      this.addModel = true
-      this.formData = _f
-      this.formStatus = 'add'
+      this.showStatus = true
     },
     async edit (item) {
       const _f = clone(editForm)
@@ -102,9 +105,23 @@ export default {
       this.formStatus = 'detail'
     },
     async remove (item) {
+      PostWithAuth(this.deleteUrl + '/' + item.row.id, {}).then(res => {
+        if (res.data.code === '200') {
+          this.$Message.success('删除成功')
+          this.onAdded()
+        } else {
+          this.$Message.error('删除失败')
+        }
+      })
+    },
+    onAdded () {
+      this.$refs['table'].getData()
     },
     onshowStatusChange (val) {
       this.addModel = val
+    },
+    onMyShowStatusChange (val) {
+      this.showStatus = val
     }
   },
   mounted () {

@@ -1,10 +1,8 @@
-export default [
-     {
+export default [{
   type: 'hidden',
   field: 'id',
   value: '14'
-},
-     {
+}, {
   type: 'input',
   title: '客户名称',
   field: 'name',
@@ -17,8 +15,21 @@ export default [
     message: '请输入客户名称',
     trigger: 'blur'
   }]
+}, {
+  type: 'input',
+  title: '客户编码',
+  field: 'customerCode',
+  props: {
+    clearable: true,
+    placeholder: '请输入客户编码'
+  },
+  validate: [{
+    required: true,
+    message: '请输入编码',
+    trigger: 'blur'
+  }]
 },
-    {
+{
   type: 'input',
   title: '联系电话',
   field: 'phone',
@@ -31,8 +42,7 @@ export default [
     message: '请输入联系电话',
     trigger: 'blur'
   }]
-},
-    {
+}, {
   type: 'input',
   title: '传真',
   field: 'fax',
@@ -45,8 +55,7 @@ export default [
     message: '请输入传真',
     trigger: 'blur'
   }]
-},
-    {
+}, {
   type: 'input',
   title: '地址',
   field: 'address',
@@ -59,8 +68,7 @@ export default [
     message: '请输入地址',
     trigger: 'blur'
   }]
-},
-    {
+}, {
   type: 'input',
   title: '备注',
   field: 'remark',
@@ -73,33 +81,17 @@ export default [
     message: '请输入备注',
     trigger: 'blur'
   }]
-},
-    {
-  type: 'input',
-  title: '创建用户（保存用户名）',
-  field: 'createUser',
-  props: {
-    clearable: true,
-    placeholder: '请输入创建用户（保存用户名）'
-  },
-  validate: [{
-    required: true,
-    message: '请输入创建用户（保存用户名）',
-    trigger: 'blur'
-  }]
-},
-    {
-  type: 'input',
-  title: '创建时间',
-  field: 'createTime',
-  props: {
-    clearable: true,
-    placeholder: '请输入创建时间'
-  },
-  validate: [{
-    required: true,
-    message: '请输入创建时间',
-    trigger: 'blur'
-  }]
-},
-]
+// }, {
+//   type: 'input',
+//   title: '创建用户（保存用户名）',
+//   field: 'createUser',
+//   props: {
+//     clearable: true,
+//     placeholder: '请输入创建用户（保存用户名）'
+//   },
+//   validate: [{
+//     required: true,
+//     message: '请输入创建用户（保存用户名）',
+//     trigger: 'blur'
+//   }]
+}]

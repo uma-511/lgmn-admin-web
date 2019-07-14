@@ -492,6 +492,86 @@ export default [{
   ]
 },
 {
+  path: '/uma',
+  name: 'uma',
+  meta: {
+    icon: 'ios-stats',
+    title: 'uma管理'
+  },
+  component: Main,
+  children: [{
+    path: '/customer',
+    name: '客户管理',
+    meta: {
+      icon: 'md-flower',
+      title: '客户',
+      notCache: true
+    },
+    component: () => import('@/view/uma/customer/customer.vue')
+  },
+  // {
+  //   path: '/customerContact',
+  //   name: '客户联系人',
+  //   meta: {
+  //     icon: 'md-flower',
+  //     title: '客户联系人',
+  //     notCache: true
+  //   },
+  //   component: () => import('@/view/uma/customerContact/customerContact.vue')
+  // },
+  {
+    path: '/deliveryNote',
+    name: '送货单',
+    meta: {
+      icon: 'md-flower',
+      title: '送货单',
+      notCache: true
+    },
+    component: () => import('@/view/uma/deliveryNote/deliveryNote.vue')
+  },
+  {
+    path: '/product',
+    name: '产品管理',
+    meta: {
+      icon: 'md-flower',
+      title: '产品管理',
+      notCache: true
+    },
+    component: () => import('@/view/uma/product/product.vue')
+  },
+  {
+    path: '/order',
+    name: '订单',
+    meta: {
+      icon: 'md-flower',
+      title: '订单',
+      notCache: true
+    },
+    component: () => import('@/view/uma/order/order.vue')
+  },
+  {
+    path: '/labelFormat',
+    name: '标签管理',
+    meta: {
+      icon: 'md-flower',
+      title: '标签管理',
+      notCache: true
+    },
+    component: () => import('@/view/uma/labelFormat/labelFormat.vue')
+  },
+  {
+    path: '/labelRecord',
+    name: '标签记录',
+    meta: {
+      icon: 'md-flower',
+      title: '标签记录',
+      notCache: true
+    },
+    component: () => import('@/view/uma/labelRecord/labelRecord.vue')
+  }
+  ]
+},
+{
   path: '/401',
   name: 'error_401',
   meta: {

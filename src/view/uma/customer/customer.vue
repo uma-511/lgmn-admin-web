@@ -2,9 +2,9 @@
   <Card>
     <tables border
             editable
+            ref="table"
             search-place="top"
             :columns='columns'
-            v-model='tableData'
             @on-edit="edit"
             @on-delete="remove"
             @on-detail="detail"
@@ -12,10 +12,10 @@
             :addable="true"
             :searchable="true"
             :searchForm="searchForm"
-            dataUrl='system/user'
+            dataUrl='customerApi/page'
             size='small'
             :height='tableHeight'></tables>
-    <DynamicForm v-bind:value='addModel'
+    <DynamicForm v-model='addModel'
                  :width='600'
                  :status='formStatus'
                  :formData='formData'
@@ -23,38 +23,46 @@
                  :updateUrl='updateUrl'
                  :detailUrl='detailUrl'
                  :currentId='currentId'
-                 @on-value-change="onshowStatusChange"></DynamicForm>
+                 @on-value-change="onshowStatusChange"
+                 @on-submit-success="getData"></DynamicForm>
+    <Drawer v-model="showContact" width='90%' :mask-closable="false" :title='showContactTitle'>
+      <CustomerContact :id='id'></CustomerContact>
+    </Drawer>
   </Card>
 </template>
 
 <script>
 import { clone } from '@/libs/tools'
+import { PostWithAuth } from '@/api/global'
 import Tables from '_c/tables'
 import DynamicForm from '_c/dynamic-form'
-import addForm from './form/add-Customer-form'
-import editForm from './form/edit-Customer-form'
-import detailForm from './form/detail-Customer-form'
-import searchFormData from './form/search-Customer-form'
+import addForm from './form/add-customer-form'
+import editForm from './form/edit-customer-form'
+import detailForm from './form/detail-customer-form'
+import searchFormData from './form/search-customer-form'
+import CustomerContact from '../customerContact/customerContact'
 export default {
   components: {
     Tables,
-    DynamicForm
+    DynamicForm,
+    CustomerContact
   },
   data () {
     var vue = this
     return {
       addModel: false,
+      showContact: false,
+      showContactTitle: '',
+      id: 0,
       formData: [],
-      createUrl: 'create.lgmn.com',
-      updateUrl: 'update.lgmn.com',
-      deleteUrl: 'delete.lgmn.com',
-      detailUrl: 'detail.lgmn.com',
+      createUrl: 'customerApi/add',
+      updateUrl: 'customerApi/update',
+      deleteUrl: 'customerApi/delete',
+      detailUrl: 'customerApi/detail',
       currentId: '',
       formStatus: 'add',
       tableData: [],
       searchForm: [],
-      totalCount: 0,
-      criteria: { page: 1, size: 10 },
       tableHeight: 0,
       columns: [
         {
@@ -62,46 +70,64 @@ export default {
           type: 'index',
           width: 70,
           align: 'center'
-        }
-        , {
-          title: '${column.comment}',
-          key: 'id'
-        }
-        , {
+        }, {
+        //   title: 'ID',
+        //   key: 'id'
+        // }, {
           title: '客户名称',
           key: 'name'
-        }
-        , {
+        }, {
+          title: '客户编码',
+          key: 'customerCode'
+        }, {
           title: '联系电话',
           key: 'phone'
-        }
-        , {
+        }, {
           title: '传真',
           key: 'fax'
-        }
-        , {
+        }, {
           title: '地址',
           key: 'address'
-        }
-        , {
+        }, {
           title: '备注',
           key: 'remark'
-        }
-        , {
-          title: '创建用户（保存用户名）',
+        }, {
+          title: '创建用户',
           key: 'createUser'
-        }
-        , {
+        }, {
+          type: 'DatePicker',
           title: '创建时间',
-          key: 'createTime'
-        }
-        , {
+          key: 'createTime',
+          render: (h, { row }) => {
+            return h('Time', {
+              props: {
+                time: parseInt(row.createTime),
+                type: 'datetime'
+              }
+            })
+          }
+        }, {
           key: 'handle',
           renderHeader (h, { column, index }) {
             return h('span', vue.$t('option'))
           },
           width: 200,
-          options: ['delete', 'edit', 'detail']
+          options: ['delete', 'edit', 'detail'],
+          button: [
+            (h, params, vm) => {
+              return h('Button', {
+                props: {
+                  type: 'success',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.showContactHandler(params.row)
+                  }
+                }
+              }, '查看联系人')
+            }
+          ]
         }
       ]
     }
@@ -118,17 +144,35 @@ export default {
       this.addModel = true
       this.formData = _f
       this.formStatus = 'edit'
+      this.currentId = item.row.id + ''
     },
     async detail (item) {
       const _f = clone(detailForm)
       this.addModel = true
       this.formData = _f
       this.formStatus = 'detail'
+      this.currentId = item.row.id + ''
     },
     async remove (item) {
+      PostWithAuth(this.deleteUrl + '/' + item.row.id, {}).then(res => {
+        if (res.data.code === '200') {
+          this.$Message.success('删除成功')
+          this.getData()
+        } else {
+          this.$Message.error('删除失败')
+        }
+      })
+    },
+    getData () {
+      this.$refs['table'].getData()
     },
     onshowStatusChange (val) {
       this.addModel = val
+    },
+    showContactHandler (row) {
+      this.id = row.id
+      this.showContact = true
+      this.showContactTitle = '查看联系人《 ' + row.name + ' 》'
     }
   },
   mounted () {
