@@ -1,11 +1,11 @@
 export default [
   {
     type: 'input',
-    title: '产品名称',
+    title: '产品编号',
     field: 'name',
     props: {
       clearable: true,
-      placeholder: '请输入产品名称'
+      placeholder: '请输入产品编号'
     }
   }
 ]

@@ -14,7 +14,7 @@ export default [
   // },
   {
     type: 'input',
-    title: '产品名称',
+    title: '产品编号',
     field: 'name',
     props: {
       readonly: true
@@ -22,31 +22,31 @@ export default [
   },
   {
     type: 'input',
-    title: '长度',
+    title: '米数',
     field: 'longs',
     props: {
       readonly: true
     }
   },
+  // {
+  //   type: 'input',
+  //   title: '宽度',
+  //   field: 'width',
+  //   props: {
+  //     readonly: true
+  //   }
+  // },
+  // {
+  //   type: 'input',
+  //   title: '米数',
+  //   field: 'height',
+  //   props: {
+  //     readonly: true
+  //   }
+  // },
   {
     type: 'input',
-    title: '宽度',
-    field: 'width',
-    props: {
-      readonly: true
-    }
-  },
-  {
-    type: 'input',
-    title: '高度',
-    field: 'height',
-    props: {
-      readonly: true
-    }
-  },
-  {
-    type: 'input',
-    title: '重量',
+    title: '斤数',
     field: 'weight',
     props: {
       readonly: true
@@ -54,7 +54,7 @@ export default [
   },
   {
     type: 'input',
-    title: '长度单位',
+    title: '材质',
     field: 'longUnit',
     props: {
       readonly: true
@@ -62,7 +62,7 @@ export default [
   },
   {
     type: 'input',
-    title: '宽度单位',
+    title: '纹路',
     field: 'widthUnit',
     props: {
       readonly: true
@@ -70,7 +70,7 @@ export default [
   },
   {
     type: 'input',
-    title: '高度单位',
+    title: '规格',
     field: 'heightUnit',
     props: {
       readonly: true
@@ -78,7 +78,7 @@ export default [
   },
   {
     type: 'input',
-    title: '重量单位',
+    title: '码数',
     field: 'weightUnit',
     props: {
       readonly: true

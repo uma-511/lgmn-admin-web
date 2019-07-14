@@ -6,7 +6,7 @@ export default [
   },
   {
     type: 'input',
-    title: '产品名称',
+    title: '产品编号',
     field: 'name',
     props: {
       readonly: true

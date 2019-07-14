@@ -94,7 +94,7 @@ export default {
           title: '标签',
           key: 'lableName'
         }, {
-          title: '订单创建时间',
+          title: '制单时间',
           key: 'createTime',
           render: (h, { row }) => {
             return h('Time', {
@@ -105,7 +105,7 @@ export default {
             })
           }
         }, {
-          title: '订单创建人',
+          title: '制单员',
           key: 'createUser'
         }, {
           title: '交货时间',
@@ -116,15 +116,15 @@ export default {
             )
           }
         }, {
-          title: '数量',
+          title: '计划数量',
           key: 'quantity'
         }, {
-        //   title: '保留int1',
-        //   key: 'int1'
-        // }, {
-        //   title: '保留int2',
-        //   key: 'int2'
-        // }, {
+          title: '楼层',
+          key: 'int01'
+        }, {
+          title: '每包数量',
+          key: 'int02'
+        }, {
         //   title: '保留int3',
         //   key: 'int3'
         // }, {
@@ -236,7 +236,9 @@ export default {
         requirement: '',
         remark: '',
         quantity: 1,
-        deliveryDate: ''
+        deliveryDate: '',
+        int01: 1,
+        int02: 1
       }
     },
     async edit (item) {
@@ -256,7 +258,9 @@ export default {
         requirement: item.row.requirement,
         remark: item.row.remark,
         quantity: item.row.quantity,
-        deliveryDate: new Date(item.row.deliveryDate)
+        deliveryDate: new Date(item.row.deliveryDate),
+        int01: item.row.int01,
+        int02: item.row.int02
       }
     },
     async detail (item) {

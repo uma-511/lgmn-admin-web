@@ -14,7 +14,7 @@ export default [
   },
   {
     type: 'input',
-    title: '包号',
+    title: '标签',
     field: 'packId',
     props: {
       readonly: true
@@ -23,23 +23,23 @@ export default [
   {
     type: 'input',
     title: '订单号',
-    field: 'orderId',
+    field: 'orderNo',
     props: {
       readonly: true
     }
   },
   {
     type: 'input',
-    title: '产品id',
-    field: 'prodId',
+    title: '产品',
+    field: 'productName',
     props: {
       readonly: true
     }
   },
   {
     type: 'input',
-    title: '型号id',
-    field: 'modelId',
+    title: '型号',
+    field: 'modelName',
     props: {
       readonly: true
     }
@@ -126,32 +126,32 @@ export default [
   },
   {
     type: 'input',
-    title: '生产人id',
-    field: 'prodUser',
+    title: '生产人',
+    field: 'prodAccount',
     props: {
       readonly: true
     }
   },
   {
     type: 'input',
-    title: '入库人id',
-    field: 'inUser',
+    title: '入库人',
+    field: 'inAccount',
     props: {
       readonly: true
     }
   },
   {
     type: 'input',
-    title: '出库人id',
-    field: 'outUser',
+    title: '出库人',
+    field: 'outAccount',
     props: {
       readonly: true
     }
   },
   {
     type: 'input',
-    title: '作废人id',
-    field: 'invalidUser',
+    title: '作废人',
+    field: 'invalidAccount',
     props: {
       readonly: true
     }

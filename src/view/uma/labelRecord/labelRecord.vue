@@ -12,7 +12,7 @@
             :addable="false"
             :searchable="true"
             :searchForm="searchForm"
-            dataUrl='labelRecordApi/page'
+            dataUrl='viewLabelRecordApi/page'
             size='small'
             :height='tableHeight'></tables>
     <DynamicForm v-bind:value='addModel'
@@ -48,7 +48,7 @@ export default {
       createUrl: 'labelRecordApi/add',
       updateUrl: 'labelRecordApi/update',
       deleteUrl: 'labelRecordApi/delete',
-      detailUrl: 'labelRecordApi/detail',
+      detailUrl: 'viewLabelRecordApi/detail',
       currentId: '',
       formStatus: 'add',
       tableData: [],
@@ -69,17 +69,17 @@ export default {
           title: '存货编码',
           key: 'labelNum'
         }, {
-          title: '包号',
+          title: '标签',
           key: 'packId'
         }, {
           title: '订单号',
-          key: 'orderId'
+          key: 'orderNo'
         }, {
-          title: '产品id',
-          key: 'prodId'
+          title: '产品',
+          key: 'productName'
         }, {
-          title: '型号id',
-          key: 'modelId'
+          title: '型号',
+          key: 'modelName'
         }, {
           title: '存储状态',
           key: 'status'

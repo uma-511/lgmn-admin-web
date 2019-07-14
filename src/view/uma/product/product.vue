@@ -83,7 +83,7 @@ export default {
         //   title: '${column.comment}',
         //   key: 'id'
         }, {
-          title: '产品名称',
+          title: '产品编号',
           key: 'name'
         }, {
           key: 'handle',

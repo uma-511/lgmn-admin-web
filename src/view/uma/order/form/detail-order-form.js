@@ -63,7 +63,7 @@ export default [
   {
     type: 'DatePicker',
     field: 'createTime',
-    title: '订单创建时间',
+    title: '制单时间',
     value: '',
     props: {
       readonly: true,
@@ -72,7 +72,7 @@ export default [
   },
   {
     type: 'input',
-    title: '订单创建人',
+    title: '制单员',
     field: 'createUser',
     props: {
       readonly: true
@@ -90,27 +90,27 @@ export default [
   },
   {
     type: 'input',
-    title: '数量',
+    title: '计划数量',
     field: 'quantity',
     props: {
       readonly: true
     }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '保留int01',
-  //   field: 'int01',
-  //   props: {
-  //     readonly: true
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '保留int02',
-  //   field: 'int02',
-  //   props: {
-  //     readonly: true
-  //   }
+  },
+  {
+    type: 'input',
+    title: '楼层',
+    field: 'int01',
+    props: {
+      readonly: true
+    }
+  },
+  {
+    type: 'input',
+    title: '每包数量',
+    field: 'int02',
+    props: {
+      readonly: true
+    }
   // },
   // {
   //   type: 'input',

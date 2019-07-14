@@ -33,11 +33,17 @@
             <FormItem label="备注" prop="remark">
               <Input type="text" v-model="formInline.remark" />
             </FormItem>
-            <FormItem label="数量" prop="quantity">
+            <FormItem label="计划数量" prop="quantity">
               <Input type="number" v-model="formInline.quantity" />
             </FormItem>
             <FormItem label="交货时间" prop="deliveryDate">
               <DatePicker type="datetime" :options="notOptionalData" placeholder="选择时间" v-model="formInline.deliveryDate"></DatePicker>
+            </FormItem>
+            <FormItem label="楼层" prop="int01">
+              <Input type="number" v-model="formInline.int01" />
+            </FormItem>
+            <FormItem label="每包数量" prop="int02">
+              <Input type="number" v-model="formInline.int02" />
             </FormItem>
           </Form>
           <div class="demo-drawer-footer">
@@ -88,6 +94,34 @@ export default {
           { required: true, message: '请输入备注', trigger: 'blur' }
         ],
         quantity: [
+          {
+            required: true,
+            message: '请输入有效数量',
+            type: 'number',
+            trigger: 'blur',
+            transform (value) {
+              if (value === '' || value < 1) {
+                return false
+              }
+              return Number(value)
+            }
+          }
+        ],
+        int01: [
+          {
+            required: true,
+            message: '请输入楼层',
+            type: 'number',
+            trigger: 'blur',
+            transform (value) {
+              if (value === '') {
+                return false
+              }
+              return Number(value)
+            }
+          }
+        ],
+        int02: [
           {
             required: true,
             message: '请输入有效数量',

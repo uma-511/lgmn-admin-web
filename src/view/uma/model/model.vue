@@ -76,28 +76,28 @@ export default {
           title: '型号名称',
           key: 'name'
         }, {
-          title: '长度',
+          title: '米数',
           key: 'longs'
+        // }, {
+        //   title: '宽度',
+        //   key: 'width'
+        // }, {
+        //   title: '高度',
+        //   key: 'height'
         }, {
-          title: '宽度',
-          key: 'width'
-        }, {
-          title: '高度',
-          key: 'height'
-        }, {
-          title: '重量',
+          title: '斤数',
           key: 'weight'
         }, {
-          title: '长度单位',
+          title: '材质',
           key: 'longUnit'
         }, {
-          title: '宽度单位',
+          title: '纹路',
           key: 'widthUnit'
         }, {
-          title: '高度单位',
+          title: '规格',
           key: 'heightUnit'
         }, {
-          title: '重量单位',
+          title: '码数',
           key: 'weightUnit'
         }, {
           title: '颜色',
