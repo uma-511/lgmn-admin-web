@@ -6,7 +6,7 @@ export const login = ({ userName, password }) => {
     password
   }
   return axios.request({
-    url: 'login',
+    url: '/user/login',
     data,
     method: 'post'
   })
@@ -14,18 +14,30 @@ export const login = ({ userName, password }) => {
 
 export const getUserInfo = (token) => {
   return axios.request({
-    url: 'get_info',
-    params: {
-      token
+    url: '/user/getuserinfo',
+    headers: {
+      Authorization: 'Bearer ' + token
     },
-    method: 'get'
+    method: 'post'
   })
 }
 
 export const logout = (token) => {
   return axios.request({
-    url: 'logout',
+    url: '/user/logout',
+    data,
     method: 'post'
+  })
+}
+
+export const updatePassword = (data, token) => {
+  return axios.request({
+    url: '/user/updatepassword',
+    method: 'post',
+    headers: {
+      Authorization: 'Bearer ' + token
+    },
+    data: data
   })
 }
 
