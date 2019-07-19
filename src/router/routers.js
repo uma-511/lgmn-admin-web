@@ -455,7 +455,7 @@ export default [{
     name: 'user',
     meta: {
       icon: 'md-flower',
-      title: `{{ user }}`,
+      title: `用户管理`,
       notCache: true
     },
     component: () => import('@/view/system/user/user-index.vue')
@@ -465,7 +465,7 @@ export default [{
     name: 'role',
     meta: {
       icon: 'md-flower',
-      title: '系统角色管理',
+      title: '角色管理',
       notCache: true
     },
     component: () => import('@/view/system/role/role.vue')
@@ -475,7 +475,7 @@ export default [{
     name: 'permission',
     meta: {
       icon: 'md-flower',
-      title: `系统权限管理`,
+      title: `权限管理`,
       notCache: true
     },
     component: () => import('@/view/system/permission/permission.vue')
@@ -496,15 +496,15 @@ export default [{
   name: 'uma',
   meta: {
     icon: 'ios-stats',
-    title: 'uma管理'
+    title: '生产管理'
   },
   component: Main,
   children: [{
     path: '/customer',
-    name: '客户管理',
+    name: 'customer',
     meta: {
       icon: 'md-flower',
-      title: '客户',
+      title: '客户管理',
       notCache: true
     },
     component: () => import('@/view/uma/customer/customer.vue')
@@ -531,7 +531,7 @@ export default [{
   },
   {
     path: '/product',
-    name: '产品管理',
+    name: 'product',
     meta: {
       icon: 'md-flower',
       title: '产品管理',
@@ -541,7 +541,7 @@ export default [{
   },
   {
     path: '/order',
-    name: '订单',
+    name: 'order',
     meta: {
       icon: 'md-flower',
       title: '订单',
@@ -551,7 +551,7 @@ export default [{
   },
   {
     path: '/labelFormat',
-    name: '标签管理',
+    name: 'labelFormat',
     meta: {
       icon: 'md-flower',
       title: '标签管理',
@@ -561,7 +561,7 @@ export default [{
   },
   {
     path: '/labelRecord',
-    name: '标签记录',
+    name: 'labelRecord',
     meta: {
       icon: 'md-flower',
       title: '标签记录',
