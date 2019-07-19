@@ -1,29 +1,47 @@
 <template>
-  <Card>
-    <tables border
-            editable
-            search-place="top"
-            :columns='columns'
-            @on-edit="edit"
-            @on-delete="remove"
-            @on-detail="detail"
-            @on-add-click="add"
-            :addable="true"
-            :searchable="true"
-            :searchForm="searchForm"
-            dataUrl='user/page'
-            size='small'
-            :height='tableHeight'></tables>
-    <DynamicForm v-bind:value='addModel'
-                 :width='600'
-                 :status='formStatus'
-                 :formData='formData'
-                 :createUrl='createUrl'
-                 :updateUrl='updateUrl'
-                 :detailUrl='detailUrl'
-                 :currentId='currentId'
-                 @on-value-change="onshowStatusChange"></DynamicForm>
-  </Card>
+  <Carousel
+    v-model="carouselIndex"
+    ref="carousel"
+    :autoplay="false"
+    dots="none"
+    :radius-dot="false"
+    :trigger="setting.trigger"
+    :arrow="setting.arrow"
+  >
+    <CarouselItem>
+      <Card>
+        <tables border
+                editable
+                search-place="top"
+                :columns='columns'
+                @on-edit="edit"
+                @on-delete="remove"
+                @on-detail="detail"
+                @on-add-click="add"
+                :addable="true"
+                :searchable="true"
+                :searchForm="searchForm"
+                dataUrl='user/page'
+                size='small'
+                :height='tableHeight'></tables>
+        <DynamicForm v-bind:value='addModel'
+                    :width='600'
+                    :status='formStatus'
+                    :formData='formData'
+                    :createUrl='createUrl'
+                    :updateUrl='updateUrl'
+                    :detailUrl='detailUrl'
+                    :currentId='currentId'
+                    @on-value-change="onshowStatusChange"></DynamicForm>
+      </Card>
+    </CarouselItem>
+    <CarouselItem>
+      <Card>
+        <Button @click="roleToIndex">返回</Button>
+        <UserRole ref="setRole"></UserRole>
+      </Card>
+    </CarouselItem>
+  </Carousel>
 </template>
 
 <script>
@@ -34,14 +52,25 @@ import addUserForm from './form/add-user-form'
 import editUserForm from './form/edit-user-form'
 import detailUserForm from './form/detail-user-form'
 import searchFormData from './form/search-user-form'
+import UserRole from '../../system/userRole/userRole'
 export default {
   components: {
     Tables,
-    DynamicForm
+    DynamicForm,
+    UserRole
   },
   data () {
     var vue = this
     return {
+      carouselIndex: 0,
+      setting: {
+        autoplay: false,
+        autoplaySpeed: 2000,
+        dots: 'none',
+        radiusDot: false,
+        trigger: 'click',
+        arrow: 'never'
+      },
       addModel: false,
       formData: [],
       createUrl: 'user/add',
@@ -98,7 +127,22 @@ export default {
             return h('span', vue.$t('option'))
           },
           width: 200,
-          options: ['delete', 'edit', 'detail']
+          options: ['delete', 'edit', 'detail'],
+          button: [
+            (h, params, vm) => {
+              return h('Button', {
+                props: {
+                  type: 'success',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.toSetRole(params.row)
+                  }
+                }
+              }, '设置角色')
+            }
+          ]
         }
       ]
     }
@@ -129,10 +173,25 @@ export default {
     },
     onshowStatusChange (val) {
       this.addModel = val
+    },
+    toSetRole (row) {
+      this.carouselIndex = 1
+      this.$refs['setRole'].setUserId(row.id)
+    },
+    roleToIndex () {
+      this.$refs['setRole'].toIndex()
+    },
+    index () {
+      this.carouselIndex = 0
     }
   },
   mounted () {
     this.searchForm = searchFormData
+  },
+  provide () {
+    return {
+      index: this.index
+    }
   }
 }
 </script>
