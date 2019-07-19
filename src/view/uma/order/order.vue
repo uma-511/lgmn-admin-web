@@ -25,7 +25,10 @@
                  :detailUrl='detailUrl'
                  :currentId='currentId'
                  @on-value-change="onshowStatusChange"></DynamicForm>
-                 <MyAddOrderForm :value='myAddOrderForm' :formInline="formInline" @on-value-change="onAddFormStatusChange" @on-added="getTableData"></MyAddOrderForm>
+    <MyAddOrderForm :value='myAddOrderForm'
+                    :formInline="formInline"
+                    @on-value-change="onAddFormStatusChange"
+                    @on-added="getTableData"></MyAddOrderForm>
   </Card>
 </template>
 
@@ -69,9 +72,9 @@ export default {
           type: 'index',
           width: 70,
           align: 'center'
-        // }, {
-        //   title: 'ID',
-        //   key: 'id'
+          // }, {
+          //   title: 'ID',
+          //   key: 'id'
         }, {
           title: '订单号',
           key: 'orderNo'
@@ -112,7 +115,7 @@ export default {
           key: 'deliveryDate',
           render: (h, { row }) => {
             return h('div',
-              this.formatDate(new Date(row.deliveryDate), 'yyyy-MM-dd hh:mm')
+              this.formatDate(new Date(row.deliveryDate), 'yyyy-MM-dd')
             )
           }
         }, {
@@ -125,90 +128,90 @@ export default {
           title: '每包数量',
           key: 'int02'
         }, {
-        //   title: '保留int3',
-        //   key: 'int3'
-        // }, {
-        //   title: '保留int4',
-        //   key: 'int4'
-        // }, {
-        //   title: '保留int5',
-        //   key: 'int5'
-        // }, {
-        //   title: '保留varchar(50)1',
-        //   key: 'var501'
-        // }, {
-        //   title: '保留varchar(50)2',
-        //   key: 'var502'
-        // }, {
-        //   title: '保留varchar(50)3',
-        //   key: 'var503'
-        // }, {
-        //   title: '保留varchar(50)4',
-        //   key: 'var504'
-        // }, {
-        //   title: '保留varchar(50)5',
-        //   key: 'var505'
-        // }, {
-        //   title: '保留varchar(100)1',
-        //   key: 'var1001'
-        // }, {
-        //   title: '保留varchar(100)2',
-        //   key: 'var1002'
-        // }, {
-        //   title: '保留varchar(100)3',
-        //   key: 'var1003'
-        // }, {
-        //   title: '保留varchar(100)4',
-        //   key: 'var1004'
-        // }, {
-        //   title: '保留varchar(100)5',
-        //   key: 'var1005'
-        // }, {
-        //   title: '保留varchar(200)1',
-        //   key: 'var2001'
-        // }, {
-        //   title: '保留varchar(200)2',
-        //   key: 'var2002'
-        // }, {
-        //   title: '保留varchar(200)3',
-        //   key: 'var2003'
-        // }, {
-        //   title: '保留varchar(200)4',
-        //   key: 'var2004'
-        // }, {
-        //   title: '保留varchar(200)5',
-        //   key: 'var2005'
-        // }, {
-        //   title: '保留datetime1',
-        //   key: 'datetime1'
-        // }, {
-        //   title: '保留datetime2',
-        //   key: 'datetime2'
-        // }, {
-        //   title: '保留decimal(10,2)1',
-        //   key: 'decimal1021'
-        // }, {
-        //   title: '保留decimal(10,2)2',
-        //   key: 'decimal1022'
-        // }, {
-        //   title: '保留decimal(10,2)3',
-        //   key: 'decimal1023'
-        // }, {
-        //   title: '保留decimal(10,2)4',
-        //   key: 'decimal1024'
-        // }, {
-        //   title: '保留decimal(11,3)1',
-        //   key: 'decimal1131'
-        // }, {
-        //   title: '保留decimal(11,3)2',
-        //   key: 'decimal1132'
-        // }, {
-        //   title: '保留decimal(11,3)3',
-        //   key: 'decimal1133'
-        // }, {
-        //   title: '保留decimal(11,3)4',
-        //   key: 'decimal1134'
-        // }, {
+          //   title: '保留int3',
+          //   key: 'int3'
+          // }, {
+          //   title: '保留int4',
+          //   key: 'int4'
+          // }, {
+          //   title: '保留int5',
+          //   key: 'int5'
+          // }, {
+          //   title: '保留varchar(50)1',
+          //   key: 'var501'
+          // }, {
+          //   title: '保留varchar(50)2',
+          //   key: 'var502'
+          // }, {
+          //   title: '保留varchar(50)3',
+          //   key: 'var503'
+          // }, {
+          //   title: '保留varchar(50)4',
+          //   key: 'var504'
+          // }, {
+          //   title: '保留varchar(50)5',
+          //   key: 'var505'
+          // }, {
+          //   title: '保留varchar(100)1',
+          //   key: 'var1001'
+          // }, {
+          //   title: '保留varchar(100)2',
+          //   key: 'var1002'
+          // }, {
+          //   title: '保留varchar(100)3',
+          //   key: 'var1003'
+          // }, {
+          //   title: '保留varchar(100)4',
+          //   key: 'var1004'
+          // }, {
+          //   title: '保留varchar(100)5',
+          //   key: 'var1005'
+          // }, {
+          //   title: '保留varchar(200)1',
+          //   key: 'var2001'
+          // }, {
+          //   title: '保留varchar(200)2',
+          //   key: 'var2002'
+          // }, {
+          //   title: '保留varchar(200)3',
+          //   key: 'var2003'
+          // }, {
+          //   title: '保留varchar(200)4',
+          //   key: 'var2004'
+          // }, {
+          //   title: '保留varchar(200)5',
+          //   key: 'var2005'
+          // }, {
+          //   title: '保留datetime1',
+          //   key: 'datetime1'
+          // }, {
+          //   title: '保留datetime2',
+          //   key: 'datetime2'
+          // }, {
+          //   title: '保留decimal(10,2)1',
+          //   key: 'decimal1021'
+          // }, {
+          //   title: '保留decimal(10,2)2',
+          //   key: 'decimal1022'
+          // }, {
+          //   title: '保留decimal(10,2)3',
+          //   key: 'decimal1023'
+          // }, {
+          //   title: '保留decimal(10,2)4',
+          //   key: 'decimal1024'
+          // }, {
+          //   title: '保留decimal(11,3)1',
+          //   key: 'decimal1131'
+          // }, {
+          //   title: '保留decimal(11,3)2',
+          //   key: 'decimal1132'
+          // }, {
+          //   title: '保留decimal(11,3)3',
+          //   key: 'decimal1133'
+          // }, {
+          //   title: '保留decimal(11,3)4',
+          //   key: 'decimal1134'
+          // }, {
           key: 'handle',
           renderHeader (h, { column, index }) {
             return h('span', vue.$t('option'))

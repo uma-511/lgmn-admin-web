@@ -27,25 +27,25 @@ export default [
       trigger: 'blur'
     }]
   },
-  {
-    type: 'inputNumber',
-    title: '米数',
-    width: '100',
-    field: 'longs',
-    value: '0.1',
-    props: {
-      clearable: true,
-      min: 0.1,
-      step: 0.1,
-      placeholder: '请输入长度'
-    },
-    validate: [{
-      required: true,
-      message: '请输入长度',
-      trigger: 'blur',
-      type: 'number'
-    }]
-  },
+  // {
+  //   type: 'inputNumber',
+  //   title: '米数',
+  //   width: '100',
+  //   field: 'longs',
+  //   value: '0.1',
+  //   props: {
+  //     clearable: true,
+  //     min: 0.1,
+  //     step: 0.1,
+  //     placeholder: '请输入长度'
+  //   },
+  //   validate: [{
+  //     required: true,
+  //     message: '请输入长度',
+  //     trigger: 'blur',
+  //     type: 'number'
+  //   }]
+  // },
   // {
   //   type: 'inputNumber',
   //   title: '宽度',
@@ -82,24 +82,24 @@ export default [
   //     type: 'number'
   //   }]
   // },
-  {
-    type: 'inputNumber',
-    title: '斤数',
-    field: 'weight',
-    value: '0.1',
-    props: {
-      min: 0.1,
-      step: 0.1,
-      clearable: true,
-      placeholder: '请输入斤数'
-    },
-    validate: [{
-      required: true,
-      message: '请输入斤数',
-      trigger: 'blur',
-      type: 'number'
-    }]
-  },
+  // {
+  //   type: 'inputNumber',
+  //   title: '斤数',
+  //   field: 'weight',
+  //   value: '0.1',
+  //   props: {
+  //     min: 0.1,
+  //     step: 0.1,
+  //     clearable: true,
+  //     placeholder: '请输入斤数'
+  //   },
+  //   validate: [{
+  //     required: true,
+  //     message: '请输入斤数',
+  //     trigger: 'blur',
+  //     type: 'number'
+  //   }]
+  // },
   {
     type: 'input',
     title: '材质',
@@ -109,7 +109,7 @@ export default [
       placeholder: '材质'
     },
     validate: [{
-      required: true,
+      // required: true,
       message: '材质',
       trigger: 'blur'
     }]
@@ -123,15 +123,33 @@ export default [
       placeholder: '纹路'
     },
     validate: [{
-      required: true,
+      // required: true,
       message: '纹路',
       trigger: 'blur'
     }]
   },
   {
+    type: 'inputNumber',
+    title: '规格值',
+    field: 'heightUnit',
+    value: '0.1',
+    props: {
+      min: 0.1,
+      step: 0.1,
+      clearable: true,
+      placeholder: '规格值'
+    },
+    validate: [{
+      required: true,
+      message: '规格值',
+      trigger: 'blur',
+      type: 'number'
+    }]
+  },
+  {
     type: 'input',
     title: '规格',
-    field: 'heightUnit',
+    field: 'weightUnit',
     props: {
       clearable: true,
       placeholder: '规格'
@@ -142,20 +160,20 @@ export default [
       trigger: 'blur'
     }]
   },
-  {
-    type: 'input',
-    title: '码数',
-    field: 'weightUnit',
-    props: {
-      clearable: true,
-      placeholder: '码数'
-    },
-    validate: [{
-      required: true,
-      message: '码数',
-      trigger: 'blur'
-    }]
-  },
+  // {
+  //   type: 'input',
+  //   title: '码数',
+  //   field: 'weightUnit',
+  //   props: {
+  //     clearable: true,
+  //     placeholder: '码数'
+  //   },
+  //   validate: [{
+  //     required: true,
+  //     message: '码数',
+  //     trigger: 'blur'
+  //   }]
+  // },
   {
     type: 'input',
     title: '颜色',
@@ -179,7 +197,7 @@ export default [
       placeholder: '请输入备注'
     },
     validate: [{
-      required: true,
+      // required: true,
       message: '请输入备注',
       trigger: 'blur'
     }]

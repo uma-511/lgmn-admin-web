@@ -1,59 +1,101 @@
 <template>
-        <Drawer title="添加订单" :width="500" @on-close="onCloseDrawer" :mask-closable="false" v-model="showStatus">
-          <Form ref="formInline" :model="formInline" :rules="ruleInline" :label-width="100">
-            <FormItem label="ID" hidden>
-              <Input type="text" v-model="formInline.id"/>
-            </FormItem>
-            <FormItem prop="orderNo" label="订单号">
-              <Input type="text" v-model="formInline.orderNo" />
-            </FormItem>
-            <FormItem label="请选择产品" prop="prodId">
-              <Select v-model="formInline.prodId" filterable @on-change="prodSelectChange">
-                <Option v-for="item in prodList" :value="item.id" :key="item.id">{{ item.name }}</Option>
-              </Select>
-            </FormItem>
-            <FormItem label="请选择型号" prop="modelId">
-              <Select v-model="formInline.modelId" filterable>
-                <Option v-for="item in modelList" :value="item.id" :key="item.id">{{ item.name }}</Option>
-              </Select>
-            </FormItem>
-            <FormItem label="请选择客户" prop="clientId">
-              <Select v-model="formInline.clientId" filterable>
-                <Option v-for="item in clientList" :value="item.id" :key="item.id">{{ item.name }}</Option>
-              </Select>
-            </FormItem>
-            <FormItem label="请选择标签" prop="lableId">
-              <Select v-model="formInline.lableId" filterable>
-                <Option v-for="item in lableList" :value="item.id" :key="item.id">{{ item.name }}</Option>
-              </Select>
-            </FormItem>
-            <FormItem label="工艺要求" prop="requirement">
-              <Input type="text" v-model="formInline.requirement" />
-            </FormItem>
-            <FormItem label="备注" prop="remark">
-              <Input type="text" v-model="formInline.remark" />
-            </FormItem>
-            <FormItem label="计划数量" prop="quantity">
-              <Input type="number" v-model="formInline.quantity" />
-            </FormItem>
-            <FormItem label="交货时间" prop="deliveryDate">
-              <DatePicker type="datetime" :options="notOptionalData" placeholder="选择时间" v-model="formInline.deliveryDate"></DatePicker>
-            </FormItem>
-            <FormItem label="楼层" prop="int01">
-              <Input type="number" v-model="formInline.int01" />
-            </FormItem>
-            <FormItem label="每包数量" prop="int02">
-              <Input type="number" v-model="formInline.int02" />
-            </FormItem>
-          </Form>
-          <div class="demo-drawer-footer">
-            <Button style="margin-right: 8px"
-                    @click="handleCancel()">{{$t('cancel')}}</Button>
-            <Button type="primary"
-                    style="margin-right: 8px"
-                    @click="handleSubmit('formInline')">{{$t('submit')}}</Button>
-          </div>
-        </Drawer>
+  <Drawer title="添加订单"
+          :width="500"
+          @on-close="onCloseDrawer"
+          :mask-closable="false"
+          v-model="showStatus">
+    <Form ref="formInline"
+          :model="formInline"
+          :rules="ruleInline"
+          :label-width="100">
+      <FormItem label="ID"
+                hidden>
+        <Input type="text"
+               v-model="formInline.id" />
+      </FormItem>
+      <FormItem prop="orderNo"
+                label="订单号">
+        <Input type="text"
+               v-model="formInline.orderNo" />
+      </FormItem>
+      <FormItem label="请选择产品"
+                prop="prodId">
+        <Select v-model="formInline.prodId"
+                filterable
+                @on-change="prodSelectChange">
+          <Option v-for="item in prodList"
+                  :value="item.id"
+                  :key="item.id">{{ item.name }}</Option>
+        </Select>
+      </FormItem>
+      <FormItem label="请选择型号"
+                prop="modelId">
+        <Select v-model="formInline.modelId"
+                filterable>
+          <Option v-for="item in modelList"
+                  :value="item.id"
+                  :key="item.id">{{ item.name }}</Option>
+        </Select>
+      </FormItem>
+      <FormItem label="请选择客户"
+                prop="clientId">
+        <Select v-model="formInline.clientId"
+                filterable>
+          <Option v-for="item in clientList"
+                  :value="item.id"
+                  :key="item.id">{{ item.name }}</Option>
+        </Select>
+      </FormItem>
+      <FormItem label="请选择标签"
+                prop="lableId">
+        <Select v-model="formInline.lableId"
+                filterable>
+          <Option v-for="item in lableList"
+                  :value="item.id"
+                  :key="item.id">{{ item.name }}</Option>
+        </Select>
+      </FormItem>
+      <FormItem label="工艺要求"
+                prop="requirement">
+        <Input type="text"
+               v-model="formInline.requirement" />
+      </FormItem>
+      <FormItem label="备注"
+                prop="remark">
+        <Input type="text"
+               v-model="formInline.remark" />
+      </FormItem>
+      <FormItem label="计划数量"
+                prop="quantity">
+        <Input type="number"
+               v-model="formInline.quantity" />
+      </FormItem>
+      <FormItem label="交货时间"
+                prop="deliveryDate">
+        <DatePicker type="date"
+                    :options="notOptionalData"
+                    placeholder="选择时间"
+                    v-model="formInline.deliveryDate"></DatePicker>
+      </FormItem>
+      <FormItem label="楼层"
+                prop="int01">
+        <Input type="number"
+               v-model="formInline.int01" />
+      </FormItem>
+      <FormItem label="每包数量"
+                prop="int02">
+        <Input type="number"
+               v-model="formInline.int02" />
+      </FormItem>
+    </Form>
+    <div class="demo-drawer-footer">
+      <Button style="margin-right: 8px"
+              @click="handleCancel()">{{$t('cancel')}}</Button>
+      <Button type="primary"
+              style="margin-right: 8px"
+              @click="handleSubmit('formInline')">{{$t('submit')}}</Button>
+    </div>
+  </Drawer>
 </template>
 
 <script>
@@ -88,10 +130,10 @@ export default {
           { required: true, message: '请选择标签', trigger: 'blur', type: 'number' }
         ],
         requirement: [
-          { required: true, message: '请输入工艺要求', trigger: 'blur' }
+          { required: false, message: '请输入工艺要求', trigger: 'blur' }
         ],
         remark: [
-          { required: true, message: '请输入备注', trigger: 'blur' }
+          { required: false, message: '请输入备注', trigger: 'blur' }
         ],
         quantity: [
           {

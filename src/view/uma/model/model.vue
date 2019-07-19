@@ -66,27 +66,27 @@ export default {
           type: 'index',
           width: 50,
           align: 'center'
-        // }, {
-        //   title: 'ID',
-        //   key: 'id'
-        // }, {
-        //   title: '产品id（当启用产品分类时必填）',
-        //   key: 'pid'
+          // }, {
+          //   title: 'ID',
+          //   key: 'id'
+          // }, {
+          //   title: '产品id（当启用产品分类时必填）',
+          //   key: 'pid'
         }, {
           title: '型号名称',
           key: 'name'
-        }, {
-          title: '米数',
-          key: 'longs'
-        // }, {
-        //   title: '宽度',
-        //   key: 'width'
-        // }, {
-        //   title: '高度',
-        //   key: 'height'
-        }, {
-          title: '斤数',
-          key: 'weight'
+          // }, {
+          //   title: '米数',
+          //   key: 'longs'
+          // }, {
+          //   title: '宽度',
+          //   key: 'width'
+          // }, {
+          //   title: '高度',
+          //   key: 'height'
+          // }, {
+          //   title: '斤数',
+          //   key: 'weight'
         }, {
           title: '材质',
           key: 'longUnit'
@@ -94,10 +94,10 @@ export default {
           title: '纹路',
           key: 'widthUnit'
         }, {
-          title: '规格',
+          title: '规格值',
           key: 'heightUnit'
         }, {
-          title: '码数',
+          title: '规格',
           key: 'weightUnit'
         }, {
           title: '颜色',

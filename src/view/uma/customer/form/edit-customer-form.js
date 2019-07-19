@@ -24,7 +24,7 @@ export default [{
     placeholder: '请输入客户编码'
   },
   validate: [{
-    required: true,
+    // required: true,
     message: '请输入编码',
     trigger: 'blur'
   }]
@@ -38,7 +38,7 @@ export default [{
     placeholder: '请输入联系电话'
   },
   validate: [{
-    required: true,
+    // required: true,
     message: '请输入联系电话',
     trigger: 'blur'
   }]
@@ -51,7 +51,7 @@ export default [{
     placeholder: '请输入传真'
   },
   validate: [{
-    required: true,
+    // required: true,
     message: '请输入传真',
     trigger: 'blur'
   }]
@@ -64,7 +64,7 @@ export default [{
     placeholder: '请输入地址'
   },
   validate: [{
-    required: true,
+    // required: true,
     message: '请输入地址',
     trigger: 'blur'
   }]
@@ -77,21 +77,22 @@ export default [{
     placeholder: '请输入备注'
   },
   validate: [{
-    required: true,
+    // required: true,
     message: '请输入备注',
     trigger: 'blur'
   }]
-// }, {
-//   type: 'input',
-//   title: '创建用户（保存用户名）',
-//   field: 'createUser',
-//   props: {
-//     clearable: true,
-//     placeholder: '请输入创建用户（保存用户名）'
-//   },
-//   validate: [{
-//     required: true,
-//     message: '请输入创建用户（保存用户名）',
-//     trigger: 'blur'
-//   }]
-}]
+  // }, {
+  //   type: 'input',
+  //   title: '创建用户（保存用户名）',
+  //   field: 'createUser',
+  //   props: {
+  //     clearable: true,
+  //     placeholder: '请输入创建用户（保存用户名）'
+  //   },
+  //   validate: [{
+  //     required: true,
+  //     message: '请输入创建用户（保存用户名）',
+  //     trigger: 'blur'
+  //   }]
+}
+]

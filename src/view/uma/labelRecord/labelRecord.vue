@@ -41,7 +41,7 @@ export default {
     DynamicForm
   },
   data () {
-    var vue = this
+    // var vue = this
     return {
       addModel: false,
       formData: [],
@@ -62,27 +62,45 @@ export default {
           type: 'index',
           width: 70,
           align: 'center'
-        // }, {
-        //   title: '${column.comment}',
-        //   key: 'id'
+          // }, {
+          //   title: '${column.comment}',
+          //   key: 'id'
         }, {
-          title: '存货编码',
+          title: '条形号',
           key: 'labelNum'
-        }, {
-          title: '标签',
-          key: 'packId'
         }, {
           title: '订单号',
           key: 'orderNo'
         }, {
-          title: '产品',
+          title: '客户',
+          key: 'customerName'
+        }, {
+          title: '型号',
+          key: 'modelName'
+        }, {
+          title: '产品编号',
           key: 'productName'
         }, {
           title: '型号',
           key: 'modelName'
         }, {
-          title: '存储状态',
-          key: 'status'
+          title: '规格',
+          key: 'specs'
+        }, {
+          title: '色号',
+          key: 'color'
+        }, {
+          title: '卷数',
+          key: 'quantity'
+        }, {
+          title: '质检员',
+          key: 'prodAccount'
+        }, {
+          title: '机台号',
+          key: 'machineNum'
+        }, {
+          title: '流水号',
+          key: 'packId'
         }, {
           title: '生产日期',
           key: 'prodTime',
@@ -94,49 +112,26 @@ export default {
               }
             })
           }
-        // }, {
-        //   title: '入库日期',
-        //   key: 'inTime'
-        // }, {
-        //   title: '出库日期',
-        //   key: 'outTime'
-        // }, {
-        //   title: '作废日期',
-        //   key: 'invalidTime'
-        // }, {
-        //   title: '标签类型：0：产品标签 1：打包标签',
-        //   key: 'labelType'
-        // }, {
-        //   title: '净重',
-        //   key: 'netWeight'
-        // }, {
-        //   title: '毛重',
-        //   key: 'grossWeight'
-        // }, {
-        //   title: '皮重',
-        //   key: 'skinWeight'
-        // }, {
-        //   title: '生产人id',
-        //   key: 'prodUser'
-        // }, {
-        //   title: '入库人id',
-        //   key: 'inUser'
-        // }, {
-        //   title: '出库人id',
-        //   key: 'outUser'
-        // }, {
-        //   title: '作废人id',
-        //   key: 'invalidUser'
-        // }, {
-        //   title: '记录类型 0：生成 1：导入',
-        //   key: 'recordType'
         }, {
-          key: 'handle',
-          renderHeader (h, { column, index }) {
-            return h('span', vue.$t('option'))
-          },
-          width: 200,
-          options: ['detail']
+          title: '存储状态',
+          key: 'status',
+          render: (h, { row }) => {
+            var statusStr = ''
+            switch (row.status) {
+              case 0:
+                statusStr = '待进仓'
+                break
+              case 1:
+                statusStr = '已进仓'
+                break
+              case 2:
+                statusStr = '已出仓'
+                break
+              default:
+                statusStr = '已作废'
+            }
+            return h('div', statusStr)
+          }
         }
       ]
     }
@@ -165,6 +160,14 @@ export default {
     },
     onshowStatusChange (val) {
       this.addModel = val
+    },
+    rowClassName (row, index) {
+      if (index === 1) {
+        return 'demo-table-info-row'
+      } else if (index === 3) {
+        return 'demo-table-error-row'
+      }
+      return ''
     }
   },
   mounted () {
@@ -172,3 +175,29 @@ export default {
   }
 }
 </script>
+<style>
+.ivu-table .demo-table-info-row td {
+  background-color: #2db7f5;
+  color: #fff;
+}
+.ivu-table .demo-table-error-row td {
+  background-color: #ff6600;
+  color: #fff;
+}
+.ivu-table td.demo-table-info-column {
+  background-color: #2db7f5;
+  color: #fff;
+}
+.ivu-table .demo-table-info-cell-name {
+  background-color: #2db7f5;
+  color: #fff;
+}
+.ivu-table .demo-table-info-cell-age {
+  background-color: #ff6600;
+  color: #fff;
+}
+.ivu-table .demo-table-info-cell-address {
+  background-color: #187;
+  color: #fff;
+}
+</style>
