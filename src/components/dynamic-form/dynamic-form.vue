@@ -50,6 +50,7 @@
 <script>
 import DynamicItem from './item'
 import { PostWithAuth } from '@/api/global'
+import { setTimeout } from 'timers'
 
 export default {
   components: {
@@ -109,6 +110,10 @@ export default {
     currentId: {
       type: String,
       default: ''
+    },
+    initData: {
+      type: Object,
+      default: () => { return {} }
     }
   },
   watch: {
@@ -136,6 +141,13 @@ export default {
     currentId (val) {
       this.id = val
       this.getDetail()
+    },
+    initData (val) {
+      let _t = this
+      this.initData = val
+      setTimeout(function () {
+        _t.setInitData()
+      }, 500)
     }
   },
   methods: {
@@ -160,7 +172,6 @@ export default {
               console.log('请传入正确提交地址')
               break
           }
-          console.log(formData)
         })
       }, () => {
         alert('验证失败')
@@ -171,7 +182,8 @@ export default {
         PostWithAuth(this.createUrl, formData).then(res => {
           if (res.data.code === '200') {
             this.$Message.success('添加成功')
-            this.$emit('on-submit-success')
+            this.fApi.resetFields()
+            this.$emit('on-add-success')
           } else {
             if (res.data.code === '205') {
               this.$Message.error('此号码已存在，请确认')
@@ -188,7 +200,7 @@ export default {
         PostWithAuth(this.updateUrl, formData).then(res => {
           if (res.data.code === '200') {
             this.$Message.success('修改成功')
-            this.$emit('on-submit-success')
+            this.$emit('on-update-success')
           } else {
             if (res.data.code === '205') {
               this.$Message.error('修改失败')
@@ -220,6 +232,9 @@ export default {
       } else {
         console.error('请提供detailUrl')
       }
+    },
+    setInitData () {
+      this.fApi.setValue(this.initData)
     },
     handleReset (name) {
       this.fApi.resetFields()

@@ -39,6 +39,34 @@ export default [{
   }
 }, {
   type: 'input',
+  title: '客户联系人',
+  field: 'contacts',
+  props: {
+    readonly: true
+  }
+}, {
+  type: 'input',
+  title: '物流公司',
+  field: 'logistics',
+  props: {
+    readonly: true
+  }
+}, {
+  type: 'input',
+  title: '物流电话',
+  field: 'logisticsPhone',
+  props: {
+    readonly: true
+  }
+}, {
+  type: 'input',
+  title: '物流地址',
+  field: 'logisticsAddress',
+  props: {
+    readonly: true
+  }
+}, {
+  type: 'input',
   title: '备注',
   field: 'remark',
   props: {
@@ -60,5 +88,4 @@ export default [{
     readonly: true,
     format: 'yyyy-MM-dd HH:mm:ss'
   }
-}
-]
+}]

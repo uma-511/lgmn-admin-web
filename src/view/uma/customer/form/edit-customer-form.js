@@ -70,6 +70,58 @@ export default [{
   }]
 }, {
   type: 'input',
+  title: '客户联系人',
+  field: 'contacts',
+  props: {
+    clearable: true,
+    placeholder: '请输入客户联系人'
+  },
+  validate: [{
+    // required: true,
+    message: '请输入客户联系人',
+    trigger: 'blur'
+  }]
+}, {
+  type: 'input',
+  title: '物流公司',
+  field: 'logistics',
+  props: {
+    clearable: true,
+    placeholder: '请输入物流公司'
+  },
+  validate: [{
+    // required: true,
+    message: '请输入物流公司',
+    trigger: 'blur'
+  }]
+}, {
+  type: 'input',
+  title: '物流电话',
+  field: 'logisticsPhone',
+  props: {
+    clearable: true,
+    placeholder: '请输入物流电话'
+  },
+  validate: [{
+    // required: true,
+    message: '请输入物流电话',
+    trigger: 'blur'
+  }]
+}, {
+  type: 'input',
+  title: '物流地址',
+  field: 'logisticsAddress',
+  props: {
+    clearable: true,
+    placeholder: '请输入物流地址'
+  },
+  validate: [{
+    // required: true,
+    message: '请输入物流地址',
+    trigger: 'blur'
+  }]
+}, {
+  type: 'input',
   title: '备注',
   field: 'remark',
   props: {

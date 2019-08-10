@@ -12,6 +12,7 @@
             :addable="true"
             :searchable="true"
             :searchForm="searchForm"
+            :queryOrders='orders'
             dataUrl='customerApi/page'
             size='small'
             :height='tableHeight'></tables>
@@ -24,15 +25,20 @@
                  :detailUrl='detailUrl'
                  :currentId='currentId'
                  @on-value-change="onshowStatusChange"
+                 @on-add-success="getData"
+                 @on-update-success="getData"
                  @on-submit-success="getData"></DynamicForm>
-    <Drawer v-model="showContact" width='90%' :mask-closable="false" :title='showContactTitle'>
+    <Drawer v-model="showContact"
+            width='90%'
+            :mask-closable="false"
+            :title='showContactTitle'>
       <CustomerContact :id='id'></CustomerContact>
     </Drawer>
   </Card>
 </template>
 
 <script>
-import { clone } from '@/libs/tools'
+import { clone, getDateStr } from '@/libs/tools'
 import { PostWithAuth } from '@/api/global'
 import Tables from '_c/tables'
 import DynamicForm from '_c/dynamic-form'
@@ -63,6 +69,7 @@ export default {
       formStatus: 'add',
       tableData: [],
       searchForm: [],
+      orders: [{ property: 'createTime', direction: 'DESC' }],
       tableHeight: 0,
       columns: [
         {
@@ -71,9 +78,9 @@ export default {
           width: 70,
           align: 'center'
         }, {
-        //   title: 'ID',
-        //   key: 'id'
-        // }, {
+          //   title: 'ID',
+          //   key: 'id'
+          // }, {
           title: '客户名称',
           key: 'name'
         }, {
@@ -89,6 +96,18 @@ export default {
           title: '地址',
           key: 'address'
         }, {
+          title: '客户联系人',
+          key: 'contacts'
+        }, {
+          title: '物流公司',
+          key: 'logistics'
+        }, {
+          title: '物流电话',
+          key: 'logisticsPhone'
+        }, {
+          title: '物流地址',
+          key: 'logisticsAddress'
+        }, {
           title: '备注',
           key: 'remark'
         }, {
@@ -99,12 +118,8 @@ export default {
           title: '创建时间',
           key: 'createTime',
           render: (h, { row }) => {
-            return h('Time', {
-              props: {
-                time: parseInt(row.createTime),
-                type: 'datetime'
-              }
-            })
+            const ts = row.createTime
+            return h('div', getDateStr(ts, 'date'))
           }
         }, {
           key: 'handle',
@@ -112,22 +127,23 @@ export default {
             return h('span', vue.$t('option'))
           },
           width: 200,
-          options: ['delete', 'edit', 'detail'],
-          button: [
-            (h, params, vm) => {
-              return h('Button', {
-                props: {
-                  type: 'success',
-                  size: 'small'
-                },
-                on: {
-                  click: () => {
-                    this.showContactHandler(params.row)
-                  }
-                }
-              }, '查看联系人')
-            }
-          ]
+          options: ['delete', 'edit', 'detail']
+          // ,
+          // button: [
+          //   (h, params, vm) => {
+          //     return h('Button', {
+          //       props: {
+          //         type: 'success',
+          //         size: 'small'
+          //       },
+          //       on: {
+          //         click: () => {
+          //           this.showContactHandler(params.row)
+          //         }
+          //       }
+          //     }, '查看联系人')
+          //   }
+          // ]
         }
       ]
     }

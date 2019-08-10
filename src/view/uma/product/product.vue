@@ -2,37 +2,39 @@
   <div>
     <Row>
       <Col span="6">
-        <Card>
-          <tables border
-                  editable
-                  ref="table"
-                  search-place="top"
-                  :columns='columns'
-                  v-model='tableData'
-                  @on-edit="edit"
-                  @on-delete="remove"
-                  @on-detail="detail"
-                  @on-add-click="add"
-                  :addable="true"
-                  :searchable="true"
-                  :searchForm="searchForm"
-                  dataUrl='productApi/page'
-                  size='small'
-                  :height='tableHeight'></tables>
-          <DynamicForm v-bind:value='addModel'
-                      :width='600'
-                      :status='formStatus'
-                      :formData='formData'
-                      :createUrl='createUrl'
-                      :updateUrl='updateUrl'
-                      :detailUrl='detailUrl'
-                      :currentId='currentId'
-                      @on-value-change="onshowStatusChange"
-                      @on-submit-success="getTableData"></DynamicForm>
-        </Card>
+      <Card>
+        <tables border
+                editable
+                ref="table"
+                search-place="top"
+                :columns='columns'
+                v-model='tableData'
+                @on-edit="edit"
+                @on-delete="remove"
+                @on-detail="detail"
+                @on-add-click="add"
+                :addable="true"
+                :searchable="true"
+                :searchForm="searchForm"
+                dataUrl='productApi/page'
+                size='small'
+                :height='tableHeight'></tables>
+        <DynamicForm v-bind:value='addModel'
+                     :width='600'
+                     :status='formStatus'
+                     :formData='formData'
+                     :createUrl='createUrl'
+                     :updateUrl='updateUrl'
+                     :detailUrl='detailUrl'
+                     :currentId='currentId'
+                     @on-value-change="onshowStatusChange"
+                     @on-submit-success="getTableData"></DynamicForm>
+      </Card>
       </Col>
       <Col span="18">
-        <Model v-show="modelShow" :productId="productId" :productName="productName"></Model>
+      <Model v-show="modelShow"
+             :productId="productId"
+             :productName="productName"></Model>
       </Col>
     </Row>
   </div>
@@ -79,11 +81,11 @@ export default {
           type: 'index',
           width: 70,
           align: 'center'
-        // }, {
-        //   title: '${column.comment}',
-        //   key: 'id'
+          // }, {
+          //   title: '${column.comment}',
+          //   key: 'id'
         }, {
-          title: '产品编号',
+          title: '编号',
           key: 'name'
         }, {
           key: 'handle',
@@ -104,7 +106,7 @@ export default {
                     this.showModelHandler(params.row)
                   }
                 }
-              }, '查看型号')
+              }, '名称')
             }
           ]
         }

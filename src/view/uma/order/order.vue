@@ -77,42 +77,48 @@ export default {
           //   key: 'id'
         }, {
           title: '订单号',
-          key: 'orderNo'
+          key: 'orderNo',
+          width: 100
         }, {
           title: '产品',
-          key: 'prodName'
+          key: 'productName',
+          width: 100
         }, {
           title: '型号',
-          key: 'modelName'
+          key: 'modelName',
+          width: 150
         }, {
           title: '客户',
-          key: 'clientName'
+          key: 'customerName',
+          width: 100
         }, {
           title: '工艺要求',
-          key: 'requirement'
-        }, {
-          title: '备注',
-          key: 'remark'
+          key: 'requirement',
+          width: 200
         }, {
           title: '标签',
-          key: 'lableName'
+          key: 'labelFormatName',
+          width: 100
         }, {
           title: '制单时间',
           key: 'createTime',
+          width: 100,
           render: (h, { row }) => {
             return h('Time', {
               props: {
                 time: parseInt(row.createTime),
-                type: 'datetime'
+                type: 'date'
               }
             })
           }
         }, {
           title: '制单员',
-          key: 'createUser'
+          key: 'createUserName',
+          width: 100
         }, {
           title: '交货时间',
           key: 'deliveryDate',
+          width: 100,
           render: (h, { row }) => {
             return h('div',
               this.formatDate(new Date(row.deliveryDate), 'yyyy-MM-dd')
@@ -120,13 +126,20 @@ export default {
           }
         }, {
           title: '计划数量',
-          key: 'quantity'
+          key: 'quantity',
+          width: 100
         }, {
           title: '楼层',
-          key: 'int01'
+          key: 'int01',
+          width: 100
         }, {
           title: '每包数量',
-          key: 'int02'
+          key: 'int02',
+          width: 100
+        }, {
+          title: '备注',
+          key: 'remark',
+          width: 250
         }, {
           //   title: '保留int3',
           //   key: 'int3'

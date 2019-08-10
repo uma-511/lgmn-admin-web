@@ -1,173 +1,45 @@
-export default [
-  {
-    type: 'input',
-    title: '存货编码',
-    field: 'labelNum',
-    props: {
-      clearable: true,
-      placeholder: '请输入存货编码'
-    }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '包号',
-  //   field: 'packId',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入包号'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '订单号',
-  //   field: 'orderId',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入订单号'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '产品id',
-  //   field: 'prodId',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入产品id'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '型号id',
-  //   field: 'modelId',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入型号id'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '存储状态',
-  //   field: 'status',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入存储状态'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '生产日期',
-  //   field: 'prodTime',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入生产日期'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '入库日期',
-  //   field: 'inTime',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入入库日期'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '出库日期',
-  //   field: 'outTime',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入出库日期'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '作废日期',
-  //   field: 'invalidTime',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入作废日期'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '标签类型：0：产品标签 1：打包标签',
-  //   field: 'labelType',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入标签类型：0：产品标签 1：打包标签'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '净重',
-  //   field: 'netWeight',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入净重'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '毛重',
-  //   field: 'grossWeight',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入毛重'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '皮重',
-  //   field: 'skinWeight',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入皮重'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '生产人id',
-  //   field: 'prodUser',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入生产人id'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '入库人id',
-  //   field: 'inUser',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入入库人id'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '出库人id',
-  //   field: 'outUser',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入出库人id'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '作废人id',
-  //   field: 'invalidUser',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入作废人id'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '记录类型 0：生成 1：导入',
-  //   field: 'recordType',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入记录类型 0：生成 1：导入'
-  //   }
+export default [{
+  type: 'input',
+  title: '订单号',
+  field: 'orderNo',
+  props: {
+    clearable: true,
+    placeholder: '请输入订单号'
   }
-]
+}, {
+  type: 'input',
+  title: '条形码',
+  field: 'labelNum',
+  props: {
+    clearable: true,
+    placeholder: '请输入条形码'
+  }
+  // }, {
+  //   type: 'DatePicker',
+  //   field: 'dateRange',
+  //   title: '生产日期',
+  //   value: ['2018-02-20', new Date()],
+  //   // input值, type为daterange,datetimerange value为数组 [start_value,end_value]
+  //   props: {
+  //     'type': 'datetimerange',
+  //     // 显示类型，可选值为 date、daterange、datetime、datetimerange、year、month
+  //     'format': 'yyyy-MM-dd',
+  //     // 展示的日期格式
+  //     'placement': 'bottom-start',
+  //     //	日期选择器出现的位置，可选值为toptop-starttop-endbottombottom-startbottom-endleftleft-startleft-endrightright-startright-end
+  //     'placeholder': '请选择生产日期',
+  //     // 占位文本
+  //     'confirm': false,
+  //     // 是否显示底部控制栏，开启后，选择完日期，选择器不会主动关闭，需用户确认后才可关闭
+  //     'size': 'default',
+  //     // 尺寸，可选值为large、small、default或者不设置
+  //     'disabled': false,
+  //     // 是否禁用选择器
+  //     'clearable': true,
+  //     // 是否显示清除按钮
+  //     'readonly': false,
+  //     // 完全只读，开启后不会弹出选择器
+  //     'editable': false
+  //     // 文本框是否可以输入
+  //   }
+}]

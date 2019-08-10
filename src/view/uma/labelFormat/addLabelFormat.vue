@@ -1,38 +1,43 @@
 <template>
-    <Drawer
-      title="添加标签模板"
-      :closable="false"
-      :width='600'
-      :mask-closable="false"
-      v-model="showStatus">
-        <Form ref="formInline" :model="formInline" :rules="ruleInline" :label-width="100">
-            <FormItem label="模板名称" prop="name">
-              <Input type="text" v-model="formInline.name" />
-            </FormItem>
-            <FormItem prop="path" label="上传模板">
-                <Upload
-                    ref="upload"
-                    action="http://localhost:8086/labelFormatApi/uploadLabelModel"
-                    name="file"
-                    :show-upload-list="true"
-                    :before-upload="beforeUpload"
-                    :on-format-error="handleFormatError"
-                    :on-success="handleSuccess"
-                    :on-error="handleError"
-                    :on-remove="handleRemove"
-                    :format ="['xlsx','xls']">
-                      <Button type="info" icon="ios-cloud-upload-outline">批量导入</Button>
-                </Upload>
-            </FormItem>
-        </Form>
-        <div class="demo-drawer-footer">
-          <Button style="margin-right: 8px"
-                  @click="handleCancel()">{{$t('cancel')}}</Button>
-          <Button type="primary"
-                  style="margin-right: 8px"
-                  @click="handleSubmit('formInline')">{{$t('submit')}}</Button>
-        </div>
-    </Drawer>
+  <Drawer title="添加标签模板"
+          :closable="false"
+          :width='600'
+          :mask-closable="false"
+          v-model="showStatus">
+    <Form ref="formInline"
+          :model="formInline"
+          :rules="ruleInline"
+          :label-width="100">
+      <FormItem label="模板名称"
+                prop="name">
+        <Input type="text"
+               v-model="formInline.name" />
+      </FormItem>
+      <FormItem prop="path"
+                label="上传模板">
+        <Upload ref="upload"
+                action="/labelFormatApi/uploadLabelModel"
+                name="file"
+                :show-upload-list="true"
+                :before-upload="beforeUpload"
+                :on-format-error="handleFormatError"
+                :on-success="handleSuccess"
+                :on-error="handleError"
+                :on-remove="handleRemove"
+                :format="['xlsx','xls']">
+          <Button type="info"
+                  icon="ios-cloud-upload-outline">上传模板</Button>
+        </Upload>
+      </FormItem>
+    </Form>
+    <div class="demo-drawer-footer">
+      <Button style="margin-right: 8px"
+              @click="handleCancel()">{{$t('cancel')}}</Button>
+      <Button type="primary"
+              style="margin-right: 8px"
+              @click="handleSubmit('formInline')">{{$t('submit')}}</Button>
+    </div>
+  </Drawer>
 </template>
 <script>
 import { add } from '@/api/labelFormatApi'
@@ -81,6 +86,7 @@ export default {
             if (res.data.code === '200') {
               this.$Message.success('添加成功')
               this.showStatus = false
+              this.$refs['formInline'].resetFields()
               this.$emit('on-added')
             } else {
               this.$Message.error('添加失败')

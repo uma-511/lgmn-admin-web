@@ -66,7 +66,7 @@ export default {
           //   title: '${column.comment}',
           //   key: 'id'
         }, {
-          title: '条形号',
+          title: '条形码',
           key: 'labelNum'
         }, {
           title: '订单号',
@@ -74,9 +74,6 @@ export default {
         }, {
           title: '客户',
           key: 'customerName'
-        }, {
-          title: '型号',
-          key: 'modelName'
         }, {
           title: '产品编号',
           key: 'productName'

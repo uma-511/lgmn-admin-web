@@ -78,9 +78,9 @@ export default {
           // }, {
           //   title: '米数',
           //   key: 'longs'
-          // }, {
-          //   title: '宽度',
-          //   key: 'width'
+        }, {
+          title: '宽度',
+          key: 'width'
           // }, {
           //   title: '高度',
           //   key: 'height'

@@ -19,11 +19,11 @@ export default [
     field: 'name',
     props: {
       clearable: true,
-      placeholder: '请输入产品编号'
+      placeholder: '请输入型号名称'
     },
     validate: [{
       required: true,
-      message: '请输入产品编号',
+      message: '请输入型号名称',
       trigger: 'blur'
     }]
   },
@@ -46,24 +46,24 @@ export default [
   //     type: 'number'
   //   }]
   // },
-  // {
-  //   type: 'inputNumber',
-  //   title: '宽度',
-  //   field: 'width',
-  //   value: '0.1',
-  //   props: {
-  //     min: 0.1,
-  //     step: 0.1,
-  //     clearable: true,
-  //     placeholder: '请输入宽度'
-  //   },
-  //   validate: [{
-  //     required: true,
-  //     message: '请输入宽度',
-  //     trigger: 'blur',
-  //     type: 'number'
-  //   }]
-  // },
+  {
+    type: 'inputNumber',
+    title: '宽度',
+    field: 'width',
+    value: '1',
+    props: {
+      min: 1,
+      step: 1,
+      clearable: true,
+      placeholder: '请输入宽度'
+    },
+    validate: [{
+      required: true,
+      message: '请输入宽度',
+      trigger: 'blur',
+      type: 'number'
+    }]
+  },
   // {
   //   type: 'inputNumber',
   //   title: '高度',
@@ -130,33 +130,33 @@ export default [
   },
   {
     type: 'inputNumber',
-    title: '规格值',
+    title: '规格',
     field: 'heightUnit',
     value: '0.1',
     props: {
       min: 0.1,
       step: 0.1,
       clearable: true,
-      placeholder: '规格值'
+      placeholder: '规格'
     },
     validate: [{
       required: true,
-      message: '规格值',
+      message: '规格',
       trigger: 'blur',
       type: 'number'
     }]
   },
   {
     type: 'input',
-    title: '规格',
+    title: '单位',
     field: 'weightUnit',
     props: {
       clearable: true,
-      placeholder: '规格'
+      placeholder: '请选择单位'
     },
     validate: [{
       required: true,
-      message: '规格',
+      message: '请选择单位',
       trigger: 'blur'
     }]
   },
