@@ -1,10 +1,12 @@
 <template>
   <div>
-    <div v-if="searchable && searchPlace === 'top'"
+    <div v-if="searchable && searchPlace === 'top' || addable"
          class="search-con search-con-top">
-      <TablesToolBar ref='searchBar'
+      <TablesToolBar v-if="searchable"
+                     ref='searchBar'
                      :formData="formDynamic"></TablesToolBar>
       <Button @click="handleSearch"
+              v-if="searchable"
               class="search-btn"
               type="primary"
               size='small'
@@ -52,7 +54,8 @@
       <slot name="loading"
             slot="loading"></slot>
     </Table>
-    <Page show-total
+    <Page v-if="paging"
+          show-total
           show-sizer
           show-elevator
           :total='totalCount'
@@ -193,6 +196,20 @@ export default {
     batchDeleteUrl: {
       type: String,
       default: ''
+    },
+    autoLoad: {
+      type: Boolean,
+      default: true
+    },
+    paging: {
+      type: Boolean,
+      default: true
+    },
+    queryOrders: {
+      type: Array,
+      default () {
+        return []
+      }
     }
   },
   /**
@@ -214,7 +231,8 @@ export default {
       postData: {
         pageNumber: 0,
         pageSize: 10
-      }
+      },
+      postOrders: []
     }
   },
   methods: {
@@ -342,12 +360,19 @@ export default {
       this.getData()
     },
     getData (data) {
+      let _postData = this.postData
+      _postData.orders = this.queryOrders
       if (data) {
-        let _postData = this.postData
+        _postData = {
+          pageNumber: 0,
+          pageSize: 10
+        }
+        _postData.orders = this.queryOrders
         Object.assign(_postData, data)
       }
-      if (this.postData) {
-        PostWithAuth(this.dataUrl, this.postData).then(res => {
+
+      if (_postData) {
+        PostWithAuth(this.dataUrl, _postData).then(res => {
           if (res) {
             this.insideTableData = res.data.data.list
             this.totalCount = res.data.data.count
@@ -368,11 +393,21 @@ export default {
     value (val) {
       this.handleTableData()
       if (this.searchable) this.handleSearch()
+    },
+    paging (val) {
+      if (!val) {
+        this.postData.pageSize = 99999
+      }
+    },
+    queryOrders (val) {
+      this.postOrders = val
     }
   },
   mounted () {
     this.handleColumns(this.columns)
-    this.getData()
+    if (this.autoLoad) {
+      this.getData()
+    }
     // this.setDefaultSearchKey()
     // this.handleTableData()
   }

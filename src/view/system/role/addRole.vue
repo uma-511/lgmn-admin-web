@@ -8,9 +8,9 @@
           :label-width="80"
           :rules="ruleInline">
       <FormItem prop="name"
-                label="权限名称">
+                label="角色名称">
         <Input v-model="dto.name"
-               placeholder="请输入权限名称"></Input>
+               placeholder="请输入角色名称"></Input>
       </FormItem>
       <FormItem prop="chineseName"
                 label="中文名称">

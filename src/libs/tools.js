@@ -46,7 +46,7 @@ export const hasOneOf = (targetarr, arr) => {
  * @param {String|Number} value 要验证的字符串或数值
  * @param {*} validList 用来验证的列表
  */
-export function oneOf (value, validList) {
+export const oneOf = (value, validList) => {
   for (let i = 0; i < validList.length; i++) {
     if (value === validList[i]) {
       return true
@@ -96,6 +96,7 @@ const getDate = (timeStamp, startType) => {
   const second = getHandledValue(d.getSeconds())
   let resStr = ''
   if (startType === 'year') resStr = year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + second
+  else if (startType === 'date') resStr = year + '-' + month + '-' + date
   else resStr = month + '-' + date + ' ' + hours + ':' + minutes
   return resStr
 }
@@ -216,5 +217,10 @@ export const objEqual = (obj1, obj2) => {
 
 export const clone = (obj) => {
   const result = JSON.parse(JSON.stringify(obj))
+  return result
+}
+
+export const getDateStr = (timeStamp, formatName) => {
+  const result = getDate(timeStamp / 1000, formatName)
   return result
 }

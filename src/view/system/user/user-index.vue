@@ -1,17 +1,16 @@
 <template>
-  <Carousel
-    v-model="carouselIndex"
-    ref="carousel"
-    :autoplay="false"
-    dots="none"
-    :radius-dot="false"
-    :trigger="setting.trigger"
-    :arrow="setting.arrow"
-  >
+  <Carousel v-model="carouselIndex"
+            ref="carousel"
+            :autoplay="false"
+            dots="none"
+            :radius-dot="false"
+            :trigger="setting.trigger"
+            :arrow="setting.arrow">
     <CarouselItem>
       <Card>
         <tables border
                 editable
+                ref="table"
                 search-place="top"
                 :columns='columns'
                 @on-edit="edit"
@@ -25,14 +24,16 @@
                 size='small'
                 :height='tableHeight'></tables>
         <DynamicForm v-bind:value='addModel'
-                    :width='600'
-                    :status='formStatus'
-                    :formData='formData'
-                    :createUrl='createUrl'
-                    :updateUrl='updateUrl'
-                    :detailUrl='detailUrl'
-                    :currentId='currentId'
-                    @on-value-change="onshowStatusChange"></DynamicForm>
+                     :width='600'
+                     :status='formStatus'
+                     :formData='formData'
+                     :createUrl='createUrl'
+                     :updateUrl='updateUrl'
+                     :detailUrl='detailUrl'
+                     :currentId='currentId'
+                     @on-save-success="onAdded"
+                     @on-update-success="onAdded"
+                     @on-value-change="onshowStatusChange"></DynamicForm>
       </Card>
     </CarouselItem>
     <CarouselItem>
@@ -47,6 +48,7 @@
 <script>
 import { clone } from '@/libs/tools'
 import Tables from '_c/tables'
+import { PostWithAuth } from '@/api/global'
 import DynamicForm from '_c/dynamic-form'
 import addUserForm from './form/add-user-form'
 import editUserForm from './form/edit-user-form'
@@ -89,24 +91,24 @@ export default {
           width: 70,
           align: 'center'
         },
-        {
-          title: '用户ID',
-          key: 'id'
-        },
-        {
-          title: '头像',
-          key: 'avatar',
-          render: (h, params) => {
-            return h('div', [
-              h('Avatar', {
-                props: {
-                  shape: 'square',
-                  src: params.row.avatar
-                }
-              })
-            ])
-          }
-        },
+        // {
+        //   title: '用户ID',
+        //   key: 'id'
+        // },
+        // {
+        //   title: '头像',
+        //   key: 'avatar',
+        //   render: (h, params) => {
+        //     return h('div', [
+        //       h('Avatar', {
+        //         props: {
+        //           shape: 'square',
+        //           src: params.row.avatar
+        //         }
+        //       })
+        //     ])
+        //   }
+        // },
         {
           renderHeader (h, { column, index }) {
             return h('span', vue.$t('account'))
@@ -118,16 +120,12 @@ export default {
           key: 'nikeName'
         },
         {
-          title: '用户类型',
-          key: 'userType'
-        },
-        {
           key: 'handle',
           renderHeader (h, { column, index }) {
             return h('span', vue.$t('option'))
           },
           width: 200,
-          options: ['delete', 'edit', 'detail'],
+          options: ['delete', 'edit'],
           button: [
             (h, params, vm) => {
               return h('Button', {
@@ -169,7 +167,14 @@ export default {
       this.currentId = item.row.id
     },
     async remove (item) {
-
+      PostWithAuth(this.deleteUrl + '/' + item.row.id, {}).then(res => {
+        if (res.data.code === '200') {
+          this.$Message.success('删除成功')
+          this.onAdded()
+        } else {
+          this.$Message.error('删除失败')
+        }
+      })
     },
     onshowStatusChange (val) {
       this.addModel = val
@@ -183,6 +188,9 @@ export default {
     },
     index () {
       this.carouselIndex = 0
+    },
+    onAdded () {
+      this.$refs['table'].getData()
     }
   },
   mounted () {

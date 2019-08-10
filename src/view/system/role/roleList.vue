@@ -53,7 +53,7 @@ export default {
       },
       columns: [
         { table: '#', type: 'index' },
-        { title: '权限名称', key: 'name' },
+        { title: '角色名称', key: 'name' },
         {
           title: '中文名称',
           key: 'chineseName'
@@ -129,14 +129,14 @@ export default {
                   'on-ok': () => { this.handleDelete(row) }
                 }
               }, [
-                h('Button', {
-                  props: {
-                    type: 'error',
-                    size: 'small',
-                    icon: 'ios-trash-outline'
-                  }
-                }, '删除')
-              ]
+                  h('Button', {
+                    props: {
+                      type: 'error',
+                      size: 'small',
+                      icon: 'ios-trash-outline'
+                    }
+                  }, '删除')
+                ]
               )
             ]
             )
