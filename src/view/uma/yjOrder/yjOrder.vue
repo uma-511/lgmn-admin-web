@@ -58,7 +58,7 @@
 
 <script>
 import Tables from '_c/tables'
-import { PostWithAuth } from '@/api/global'
+import { PostWithAuth, excel } from '@/api/global'
 import { getDateStr } from '@/libs/tools'
 import searchFormData from './form/search-yjOrder-form'
 import AddYJOrder from './addYJOrder'
@@ -182,7 +182,22 @@ export default {
             return h('span', vue.$t('option'))
           },
           width: 200,
-          options: ['delete', 'edit']
+          options: ['delete', 'edit'],
+          button: [
+            (h, params, vm) => {
+              return h('Button', {
+                props: {
+                  type: 'success',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.exportDataHandler(params.row)
+                  }
+                }
+              }, '导出数据')
+            }
+          ]
         }
       ]
     }
@@ -271,6 +286,10 @@ export default {
           this.$Message.error('获取标签模板失败')
         }
       })
+    },
+    exportDataHandler (val) {
+      console.log(val)
+      excel('yjOrderApi/exportData/' + val.id)
     }
   },
   mounted () {
