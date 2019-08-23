@@ -97,6 +97,7 @@ const getDate = (timeStamp, startType) => {
   let resStr = ''
   if (startType === 'year') resStr = year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + second
   else if (startType === 'date') resStr = year + '-' + month + '-' + date
+  else if (startType === 'month') resStr = month + '-' + date
   else resStr = month + '-' + date + ' ' + hours + ':' + minutes
   return resStr
 }
