@@ -17,256 +17,268 @@ import Main from '@/components/main'
  * }
  */
 
-export default [
-  {
-    path: '/login',
-    name: 'login',
-    meta: {
-      title: 'Login - 登录',
-      hideInMenu: true
-    },
-    component: () => import('@/view/login/login.vue')
+export default [{
+  path: '/login',
+  name: 'login',
+  meta: {
+    title: 'Login - 登录',
+    hideInMenu: true
   },
-  {
-    path: '/',
-    name: '_home',
-    redirect: '/home',
-    component: Main,
+  component: () => import('@/view/login/login.vue')
+},
+{
+  path: '/',
+  name: '_home',
+  redirect: '/home',
+  component: Main,
+  meta: {
+    hideInMenu: true,
+    notCache: true
+  },
+  children: [{
+    path: '/home',
+    name: 'home',
     meta: {
       hideInMenu: true,
+      title: '首页',
+      notCache: true,
+      icon: 'md-home'
+    },
+    component: () => import('@/view/single-page/home')
+  }]
+},
+{
+  path: '/argu',
+  name: 'argu',
+  meta: {
+    hideInMenu: true
+  },
+  component: Main,
+  children: [{
+    path: 'params/:id',
+    name: 'params',
+    meta: {
+      icon: 'md-flower',
+      title: route => `{{ params }}-${route.params.id}`,
+      notCache: true,
+      beforeCloseName: 'before_close_normal'
+    },
+    component: () => import('@/view/argu-page/params.vue')
+  },
+  {
+    path: 'query',
+    name: 'query',
+    meta: {
+      icon: 'md-flower',
+      title: route => `{{ query }}-${route.query.id}`,
       notCache: true
     },
-    children: [
-      {
-        path: '/home',
-        name: 'home',
-        meta: {
-          hideInMenu: true,
-          title: '首页',
-          notCache: true,
-          icon: 'md-home'
-        },
-        component: () => import('@/view/single-page/home')
-      }
-    ]
-  },
-  {
-    path: '/argu',
-    name: 'argu',
-    meta: {
-      hideInMenu: true
-    },
-    component: Main,
-    children: [
-      {
-        path: 'params/:id',
-        name: 'params',
-        meta: {
-          icon: 'md-flower',
-          title: route => `{{ params }}-${route.params.id}`,
-          notCache: true,
-          beforeCloseName: 'before_close_normal'
-        },
-        component: () => import('@/view/argu-page/params.vue')
-      },
-      {
-        path: 'query',
-        name: 'query',
-        meta: {
-          icon: 'md-flower',
-          title: route => `{{ query }}-${route.query.id}`,
-          notCache: true
-        },
-        component: () => import('@/view/argu-page/query.vue')
-      }
-    ]
-  },
-  {
-    path: '/system',
-    name: 'system',
-    meta: {
-      icon: 'ios-stats',
-      title: '系统管理'
-    },
-    component: Main,
-    children: [
-      {
-        path: '/user',
-        name: 'user',
-        meta: {
-          icon: 'md-flower',
-          title: `用户管理`,
-          access: ['user'],
-          notCache: true
-        },
-        component: () => import('@/view/system/user/user-index.vue')
-      },
-      {
-        path: '/role',
-        name: 'role',
-        meta: {
-          icon: 'md-flower',
-          title: '角色管理',
-          access: ['role'],
-          notCache: true
-        },
-        component: () => import('@/view/system/role/role.vue')
-      },
-      {
-        path: '/permission',
-        name: 'permission',
-        meta: {
-          icon: 'md-flower',
-          title: `权限管理`,
-          access: ['permission'],
-          notCache: true
-        },
-        component: () => import('@/view/system/permission/permission.vue')
-      },
-      {
-        path: '/config',
-        name: 'config',
-        meta: {
-          icon: 'md-flower',
-          title: `配置管理`,
-          access: ['config'],
-          notCache: true
-        },
-        component: () => import('@/view/system/config/config.vue')
-      },
-      {
-        path: '/labelFormat',
-        name: 'labelFormat',
-        meta: {
-          icon: 'md-flower',
-          title: '标签管理',
-          access: ['labelFormat'],
-          notCache: true
-        },
-        component: () => import('@/view/uma/labelFormat/labelFormat.vue')
-      }
-    ]
-  },
-  {
-    path: '/uma',
-    name: 'uma',
-    meta: {
-      icon: 'ios-stats',
-      title: '生产管理'
-    },
-    component: Main,
-    children: [
-      {
-        path: '/customer',
-        name: 'customer',
-        meta: {
-          icon: 'md-flower',
-          title: '客户管理',
-          access: ['customer'],
-          notCache: true
-        },
-        component: () => import('@/view/uma/customer/customer.vue')
-      },
-      // {
-      //   path: '/customerContact',
-      //   name: '客户联系人',
-      //   meta: {
-      //     icon: 'md-flower',
-      //     title: '客户联系人',
-      //     notCache: true
-      //   },
-      //   component: () => import('@/view/uma/customerContact/customerContact.vue')
-      // },
-      {
-        path: '/deliveryNote',
-        name: 'deliveryNote',
-        meta: {
-          icon: 'md-flower',
-          title: '送货单',
-          access: ['deliveryNote'],
-          notCache: true
-        },
-        component: () => import('@/view/uma/deliveryNote/deliveryNote.vue')
-      },
-      // {
-      //   path: '/product',
-      //   name: 'product',
-      //   meta: {
-      //     icon: 'md-flower',
-      //     title: '产品管理',
-      //     // access: ['product'],
-      //     notCache: true
-      //   },
-      //   component: () => import('@/view/uma/product/product.vue')
-      // },
-      {
-        path: '/product',
-        name: 'product',
-        meta: {
-          icon: 'md-flower',
-          title: '编号管理',
-          access: ['product'],
-          notCache: true
-        },
-        component: () => import('@/view/uma/yjProduct/yjProduct.vue')
-      },
-      {
-        path: '/order',
-        name: 'order',
-        meta: {
-          icon: 'md-flower',
-          title: '订单',
-          access: ['order'],
-          notCache: false
-        },
-        component: () => import('@/view/uma/yjOrder/yjOrder.vue')
-      },
-      {
-        path: '/labelRecord',
-        name: 'labelRecord',
-        meta: {
-          icon: 'md-flower',
-          title: '标签记录',
-          access: ['labelRecord'],
-          notCache: true
-        },
-        component: () => import('@/view/uma/labelRecord/labelRecord.vue')
-      },
-      {
-        path: '/viewYjStock',
-        name: 'viewYjStock',
-        meta: {
-          icon: 'md-flower',
-          title: '库存记录',
-          // access: ['viewYjStock'],
-          notCache: true
-        },
-        component: () => import('@/view/uma/viewYjStock/viewYjStock.vue')
-      }
-    ]
-  },
-  {
-    path: '/401',
-    name: 'error_401',
-    meta: {
-      hideInMenu: true
-    },
-    component: () => import('@/view/error-page/401.vue')
-  },
-  {
-    path: '/500',
-    name: 'error_500',
-    meta: {
-      hideInMenu: true
-    },
-    component: () => import('@/view/error-page/500.vue')
-  },
-  {
-    path: '*',
-    name: 'error_404',
-    meta: {
-      hideInMenu: true
-    },
-    component: () => import('@/view/error-page/404.vue')
+    component: () => import('@/view/argu-page/query.vue')
   }
+  ]
+},
+{
+  path: '/system',
+  name: 'system',
+  meta: {
+    icon: 'ios-stats',
+    title: '系统管理'
+  },
+  component: Main,
+  children: [{
+    path: '/user',
+    name: 'user',
+    meta: {
+      icon: 'md-flower',
+      title: `用户管理`,
+      access: ['user'],
+      notCache: true
+    },
+    component: () => import('@/view/system/user/user-index.vue')
+  },
+  {
+    path: '/role',
+    name: 'role',
+    meta: {
+      icon: 'md-flower',
+      title: '角色管理',
+      access: ['role'],
+      notCache: true
+    },
+    component: () => import('@/view/system/role/role.vue')
+  },
+  {
+    path: '/permission',
+    name: 'permission',
+    meta: {
+      icon: 'md-flower',
+      title: `权限管理`,
+      access: ['permission'],
+      notCache: true
+    },
+    component: () => import('@/view/system/permission/permission.vue')
+  },
+  {
+    path: '/config',
+    name: 'config',
+    meta: {
+      icon: 'md-flower',
+      title: `配置管理`,
+      access: ['config'],
+      notCache: true
+    },
+    component: () => import('@/view/system/config/config.vue')
+  },
+  {
+    path: '/labelFormat',
+    name: 'labelFormat',
+    meta: {
+      icon: 'md-flower',
+      title: '标签管理',
+      access: ['labelFormat'],
+      notCache: true
+    },
+    component: () => import('@/view/uma/labelFormat/labelFormat.vue')
+  },
+  {
+    path: '/deviceManager',
+    name: 'deviceManager',
+    meta: {
+      icon: 'md-flower',
+      title: '设备管理',
+      // access: ['labelFormat'],
+      notCache: true
+    },
+    component: () => import('@/view/system/deviceManager/device.vue')
+  }
+  ]
+},
+{
+  path: '/uma',
+  name: 'uma',
+  meta: {
+    icon: 'ios-stats',
+    title: '生产管理'
+  },
+  component: Main,
+  children: [{
+    path: '/customer',
+    name: 'customer',
+    meta: {
+      icon: 'md-flower',
+      title: '客户管理',
+      access: ['customer'],
+      notCache: true
+    },
+    component: () => import('@/view/uma/customer/customer.vue')
+  },
+    // {
+    //   path: '/customerContact',
+    //   name: '客户联系人',
+    //   meta: {
+    //     icon: 'md-flower',
+    //     title: '客户联系人',
+    //     notCache: true
+    //   },
+    //   component: () => import('@/view/uma/customerContact/customerContact.vue')
+    // },
+  {
+    path: '/deliveryNote',
+    name: 'deliveryNote',
+    meta: {
+      icon: 'md-flower',
+      title: '送货单',
+      access: ['deliveryNote'],
+      notCache: true
+    },
+    component: () => import('@/view/uma/deliveryNote/deliveryNote.vue')
+  },
+    // {
+    //   path: '/product',
+    //   name: 'product',
+    //   meta: {
+    //     icon: 'md-flower',
+    //     title: '产品管理',
+    //     // access: ['product'],
+    //     notCache: true
+    //   },
+    //   component: () => import('@/view/uma/product/product.vue')
+    // },
+  {
+    path: '/product',
+    name: 'product',
+    meta: {
+      icon: 'md-flower',
+      title: '编号管理',
+      access: ['product'],
+      notCache: true
+    },
+    component: () => import('@/view/uma/yjProduct/yjProduct.vue')
+  },
+  {
+    path: '/order',
+    name: 'order',
+    meta: {
+      icon: 'md-flower',
+      title: '订单',
+      access: ['order'],
+      notCache: false
+    },
+    component: () => import('@/view/uma/yjOrder/yjOrder.vue')
+  },
+  {
+    path: '/labelRecord',
+    name: 'labelRecord',
+    meta: {
+      icon: 'md-flower',
+      title: '标签记录',
+      access: ['labelRecord'],
+      notCache: true
+    },
+    component: () => import('@/view/uma/labelRecord/labelRecord.vue')
+  },
+  {
+    path: '/viewYjStock',
+    name: 'viewYjStock',
+    meta: {
+      icon: 'md-flower',
+      title: '库存记录',
+      // access: ['viewYjStock'],
+      notCache: true
+    },
+    component: () => import('@/view/uma/viewYjStock/viewYjStock.vue')
+  }
+  ]
+}, {
+  path: '/lookboard',
+  name: 'LookBoard',
+  meta: {
+    hideInMenu: true
+  },
+  component: () => import('@/view/uma/ViewLookBoard/ViewLookBoardIndex.vue')
+},
+{
+  path: '/401',
+  name: 'error_401',
+  meta: {
+    hideInMenu: true
+  },
+  component: () => import('@/view/error-page/401.vue')
+},
+{
+  path: '/500',
+  name: 'error_500',
+  meta: {
+    hideInMenu: true
+  },
+  component: () => import('@/view/error-page/500.vue')
+},
+{
+  path: '*',
+  name: 'error_404',
+  meta: {
+    hideInMenu: true
+  },
+  component: () => import('@/view/error-page/404.vue')
+}
 ]

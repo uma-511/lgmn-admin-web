@@ -288,8 +288,24 @@ export default {
       })
     },
     exportDataHandler (val) {
-      console.log(val)
-      excel('yjOrderApi/exportData/' + val.id)
+      excel('yjOrderApi/exportData/' + val.id).then(res => {
+        if (res.status === 200) {
+          var blob = new Blob([res.data], {
+            type:
+              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'
+          })
+          var downloadElement = document.createElement('a')
+          var href = window.URL.createObjectURL(blob)
+          downloadElement.href = href
+          downloadElement.download = val.clientName + '_' + val.orderNum + '.xls'
+          document.body.appendChild(downloadElement)
+          downloadElement.click()
+          document.body.removeChild(downloadElement)
+          window.URL.revokeObjectURL(href)
+        } else {
+          this.$Message.error('导出失败')
+        }
+      })
     }
   },
   mounted () {

@@ -262,7 +262,7 @@ export default {
           var downloadElement = document.createElement('a')
           var href = window.URL.createObjectURL(blob)
           downloadElement.href = href
-          downloadElement.download = vue.currentRecord.deliveryNum + '.xlsx'
+          downloadElement.download = vue.currentRecord.deliveryNum + '.xls'
           document.body.appendChild(downloadElement)
           downloadElement.click()
           document.body.removeChild(downloadElement)
