@@ -130,17 +130,6 @@ export default [{
     component: () => import('@/view/system/config/config.vue')
   },
   {
-    path: '/labelFormat',
-    name: 'labelFormat',
-    meta: {
-      icon: 'md-flower',
-      title: '标签管理',
-      access: ['labelFormat'],
-      notCache: true
-    },
-    component: () => import('@/view/uma/labelFormat/labelFormat.vue')
-  },
-  {
     path: '/deviceManager',
     name: 'deviceManager',
     meta: {
@@ -152,110 +141,6 @@ export default [{
     component: () => import('@/view/system/deviceManager/device.vue')
   }
   ]
-},
-{
-  path: '/uma',
-  name: 'uma',
-  meta: {
-    icon: 'ios-stats',
-    title: '生产管理'
-  },
-  component: Main,
-  children: [{
-    path: '/customer',
-    name: 'customer',
-    meta: {
-      icon: 'md-flower',
-      title: '客户管理',
-      access: ['customer'],
-      notCache: true
-    },
-    component: () => import('@/view/uma/customer/customer.vue')
-  },
-    // {
-    //   path: '/customerContact',
-    //   name: '客户联系人',
-    //   meta: {
-    //     icon: 'md-flower',
-    //     title: '客户联系人',
-    //     notCache: true
-    //   },
-    //   component: () => import('@/view/uma/customerContact/customerContact.vue')
-    // },
-  {
-    path: '/deliveryNote',
-    name: 'deliveryNote',
-    meta: {
-      icon: 'md-flower',
-      title: '送货单',
-      access: ['deliveryNote'],
-      notCache: true
-    },
-    component: () => import('@/view/uma/deliveryNote/deliveryNote.vue')
-  },
-    // {
-    //   path: '/product',
-    //   name: 'product',
-    //   meta: {
-    //     icon: 'md-flower',
-    //     title: '产品管理',
-    //     // access: ['product'],
-    //     notCache: true
-    //   },
-    //   component: () => import('@/view/uma/product/product.vue')
-    // },
-  {
-    path: '/product',
-    name: 'product',
-    meta: {
-      icon: 'md-flower',
-      title: '编号管理',
-      access: ['product'],
-      notCache: true
-    },
-    component: () => import('@/view/uma/yjProduct/yjProduct.vue')
-  },
-  {
-    path: '/order',
-    name: 'order',
-    meta: {
-      icon: 'md-flower',
-      title: '订单',
-      access: ['order'],
-      notCache: false
-    },
-    component: () => import('@/view/uma/yjOrder/yjOrder.vue')
-  },
-  {
-    path: '/labelRecord',
-    name: 'labelRecord',
-    meta: {
-      icon: 'md-flower',
-      title: '标签记录',
-      access: ['labelRecord'],
-      notCache: true
-    },
-    component: () => import('@/view/uma/labelRecord/labelRecord.vue')
-  },
-  {
-    path: '/viewYjStock',
-    name: 'viewYjStock',
-    meta: {
-      icon: 'md-flower',
-      title: '库存记录',
-      // access: ['viewYjStock'],
-      notCache: true
-    },
-    component: () => import('@/view/uma/viewYjStock/viewYjStock.vue')
-  }
-  ]
-}, {
-  path: '/lookboard',
-  name: 'LookBoard',
-  meta: {
-    hideInMenu: true
-  },
-  component: () => import('@/view/uma/ViewLookBoard/ViewLookBoardIndex.vue')
 },
 {
   path: '/401',
