@@ -180,8 +180,8 @@ export default {
                     this.setPrinted(params)
                   }
                 }
-              },
-                [h('Button', '完成出货')])
+              }, [h('Button', '完成出货')]
+              )
             }
           ]
         }

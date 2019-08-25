@@ -205,7 +205,7 @@ export default {
   mounted () {
     var _this = this
     _this.getData()
-    var timeid = window.setInterval(function () { _this.getData() }, 15000)
+    window.setInterval(function () { _this.getData() }, 15000)
     // this.getData()
   }
 }
