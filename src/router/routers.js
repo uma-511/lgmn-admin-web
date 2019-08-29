@@ -141,6 +141,25 @@ export default [{
     component: () => import('@/view/system/deviceManager/device.vue')
   }
   ]
+}, {
+  path: '/swcy',
+  name: 'swcy',
+  meta: {
+    icon: 'ios-stats',
+    title: '三维创业'
+  },
+  component: Main,
+  children: [{
+    path: '/store',
+    name: 'store',
+    meta: {
+      icon: 'md-flower',
+      title: `共享店`,
+      // access: ['user'],
+      notCache: true
+    },
+    component: () => import('@/view/swcy/SwcyStore/SwcyStoreIndex.vue')
+  }]
 },
 {
   path: '/401',
