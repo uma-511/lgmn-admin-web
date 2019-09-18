@@ -3,11 +3,11 @@
           :closable="true"
           :width='600'
           :mask-closable="false"
-          v-model="showStatus">
+          v-model="showStatus"
+          :label-width="100">
     <Form ref="formInline"
           :model="formInline"
-          :rules="ruleInline"
-          :label-width="100">
+          :rules="ruleInline">
       <FormItem prop="clientName"
                 label="客户名称">
         <Select v-model="formInline.customer"
@@ -17,7 +17,16 @@
                   :key="item.id">{{ item.name }}</Option>
         </Select>
       </FormItem>
+      <FormItem label="汇款日期"
+                prop="paymentTime">
+        <DatePicker type="date"
+                    format="yyyy-MM-dd"
+                    v-model="formInline.paymentTime"
+                    @on-change="onDataChange2"
+                    placeholder="请选择日期"></DatePicker>
+      </FormItem>
     </Form>
+
     <div class="demo-drawer-footer">
       <Button style="margin-right: 8px"
               @click="handleCancel()">{{$t('cancel')}}</Button>
@@ -36,7 +45,8 @@ export default {
       showStatus: false,
       formInline: {
         customerId: 0,
-        customer: ''
+        customer: '',
+        paymentTime: ''
       },
       ruleInline: {
         customer: [
@@ -191,6 +201,9 @@ export default {
     },
     onDataChange (dateStr, date) {
       this.formInline.deliveryDate = dateStr
+    },
+    onDataChange2 (dateStr, date) {
+      this.formInline.paymentTime = dateStr
     },
     setId () {
       let client = this.clientList.filter(this.clientFilter)

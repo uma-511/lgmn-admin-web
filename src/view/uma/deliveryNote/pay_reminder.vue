@@ -10,51 +10,21 @@
             @on-delete="remove"
             @on-detail="detail"
             @on-add-click="add"
-            :addable="true"
-            :searchable="true"
+            :addable="false"
+            :searchable="false"
             :searchForm="searchForm"
             :queryOrders="orders"
-            dataUrl='deliveryNoteApi/page'
+            dataUrl='deliveryNoteApi/remindpage'
             size='small'
             :height='tableHeight'></tables>
-    <!-- <DynamicForm v-bind:value='addModel'
-                 :width='600'
-                 :status='formStatus'
-                 :formData='formData'
-                 :createUrl='createUrl'
-                 :updateUrl='updateUrl'
-                 :detailUrl='detailUrl'
-                 :currentId='currentId'
-                 @on-value-change="onshowStatusChange"
-                 @on-submit-success="getData"></DynamicForm> -->
     <Modal v-model="showModal"
            fullscreen
-           title="出库单编辑">
-      <p slot="header"
-         style="height:50px;color:#f60;text-align:center">
-        <Icon type="ios-information-circle"></Icon>
-        <span>出库单编辑</span>
-        <Button type="success"
-                style="margin-left:100px;"
-                @click="exportExcel">导出Excel</Button>
-      </p>
+           title="出库单详情">
       <DeliveryList ref="deliveryList"
                     :currentId="currentId"></DeliveryList>
       <p slot="footer">
       </p>
     </Modal>
-    <AddDeliveryNote v-model="addModel"
-                     :clients="clientList"
-                     :width='600'
-                     @on-added="onAdded"
-                     @on-value-change="onAddStatusChange"></AddDeliveryNote>
-
-    <EditDeliveryNote v-model="editModel"
-                      :clients="clientList"
-                      :width='600'
-                      :currentId="currentId"
-                      @on-added="onAdded"
-                      @on-value-change="onEditStatusChange"></EditDeliveryNote>
   </Card>
 </template>
 
@@ -69,15 +39,11 @@ import DynamicForm from '_c/dynamic-form'
 // import detailForm from './form/detail-deliveryNote-form'
 // import searchFormData from './form/search-deliveryNote-form'
 import DeliveryList from '../deliveryList/deliveryList'
-import AddDeliveryNote from './addDeliveryNote'
-import EditDeliveryNote from './editDeliveryNote'
 export default {
   components: {
     Tables,
     DynamicForm,
-    DeliveryList,
-    AddDeliveryNote,
-    EditDeliveryNote
+    DeliveryList
   },
   data () {
     var vue = this
@@ -113,31 +79,28 @@ export default {
         }, {
           title: '客户名称',
           key: 'customer'
+          // }, {
+          //   title: '联系人',
+          //   key: 'contact'
+          // }, {
+          //   title: '地址',
+          //   key: 'address'
+          // }, {
+          //   title: '联系电话',
+          //   key: 'phone'
+
+          // }, {
+          //   title: '司机',
+          //   key: 'driver'
+          // }, {
+          //   title: '车牌号',
+          //   key: 'carNum'
         }, {
           title: '开单时间',
           key: 'createTime',
           render: (h, { row }) => {
             const ts = row.createTime
             return h('div', getDateStr(ts, 'year'))
-          }
-        }, {
-          title: '开单人',
-          key: 'createUser'
-        }, {
-          title: '出货状态',
-          key: 'printed',
-          render: (h, { row }) => {
-            const status = row.printed
-            const statusName = status === 1 ? '完成' : '出货中'
-            const prop = {
-              color: status === 1 ? 'success' : 'error'
-            }
-            return h('Tag',
-              {
-                props: prop
-              },
-              statusName
-            )
           }
         }, {
           title: '汇款日期',
@@ -148,40 +111,12 @@ export default {
             return h('div', getDateStr(ts, 'date'))
           }
         }, {
-          title: '是否已回款',
-          key: 'hadPaid',
-          width: 100,
-          render: (h, { row }) => {
-            const ts = row.hadPaid === 1 ? '是' : '否'
-            return h('div', ts)
-          }
-        }, {
-          title: '确认回款人',
-          key: 'payConfirmer',
-          width: 100
-        }, {
           key: 'handle',
           renderHeader (h, { column, index }) {
             return h('span', vue.$t('option'))
           },
-          width: 200,
-          options: ['delete', 'edit', 'detail'],
+          options: ['detail'],
           button: [
-            (h, params, vm) => {
-              return h('Poptip', {
-                props: {
-                  confirm: true,
-                  transfer: true,
-                  title: '你确定完成出货单吗?'
-                },
-                on: {
-                  'on-ok': () => {
-                    this.setPrinted(params)
-                  }
-                }
-              }, [h('Button', '完成出货')]
-              )
-            },
             (h, params, vm) => {
               return h('Button', {
                 props: {
@@ -309,7 +244,7 @@ export default {
   },
   mounted () {
     // this.searchForm = searchFormData
-    this.getClientList()
+    // this.getClientList()
   }
 }
 </script>

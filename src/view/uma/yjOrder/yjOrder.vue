@@ -149,7 +149,7 @@ export default {
             return h('div', getDateStr(ts, 'date'))
           }
         }, {
-          title: '客户名',
+          title: '客户名称',
           key: 'clientName',
           width: 100
         }, {
@@ -160,6 +160,14 @@ export default {
           title: '工艺要求',
           key: 'requirement',
           width: 300
+        }, {
+          title: '预警天数',
+          key: 'alertDay',
+          width: 100
+        }, {
+          title: '看板显示阈值',
+          key: 'lookboardThreshold',
+          width: 100
         }, {
           title: '备注',
           key: 'remark',

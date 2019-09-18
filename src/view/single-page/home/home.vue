@@ -1,5 +1,15 @@
 <template>
   <div>
+    <Row :gutter="20">
+      <Card title="回款提醒">
+        <PayReminder></PayReminder>
+      </Card>
+    </Row>
+    <Row :gutter="20">
+      <Card title="订货提醒">
+        <OrderReminder></OrderReminder>
+      </Card>
+    </Row>
     <!-- <Row :gutter="20">
       <i-col :xs="12" :md="8" :lg="4" v-for="(infor, i) in inforCardData" :key="`infor-${i}`" style="height: 120px;padding-bottom: 10px;">
         <infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="36">
@@ -33,6 +43,9 @@ import InforCard from '_c/info-card'
 import CountTo from '_c/count-to'
 import { ChartPie, ChartBar } from '_c/charts'
 import Example from './example.vue'
+import PayReminder from '../../uma/deliveryNote/pay_reminder'
+import OrderReminder from '../../uma/ViewOrderReminder/ViewOrderReminderIndex'
+
 export default {
   name: 'home',
   components: {
@@ -40,7 +53,9 @@ export default {
     CountTo,
     ChartPie,
     ChartBar,
-    Example
+    Example,
+    PayReminder,
+    OrderReminder
   },
   data () {
     return {
@@ -77,7 +92,7 @@ export default {
 </script>
 
 <style lang="less">
-.count-style{
+.count-style {
   font-size: 50px;
 }
 </style>

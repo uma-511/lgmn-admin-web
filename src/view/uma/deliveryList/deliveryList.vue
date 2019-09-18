@@ -208,7 +208,7 @@ export default {
       })
     },
     getData () {
-      if (this.currId !== '0') {
+      if (this.currId && this.currId !== '' && this.currId !== '0') {
         PostWithAuth(this.dataUrl + '/' + this.currId, this.formInline).then(res => {
           if (res.data.code === '200') {
             const data = res.data.data

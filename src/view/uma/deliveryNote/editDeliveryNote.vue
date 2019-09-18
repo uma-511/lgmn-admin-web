@@ -17,6 +17,14 @@
                   :key="item.id">{{ item.name }}</Option>
         </Select>
       </FormItem>
+      <FormItem label="汇款日期"
+                prop="paymentTime">
+        <DatePicker type="date"
+                    format="yyyy-MM-dd"
+                    v-model="formInline.paymentTime"
+                    @on-change="onDataChange2"
+                    placeholder="请选择日期"></DatePicker>
+      </FormItem>
     </Form>
     <div class="demo-drawer-footer">
       <Button style="margin-right: 8px"
@@ -36,7 +44,8 @@ export default {
       showStatus: false,
       formInline: {
         customerId: 0,
-        customer: ''
+        customer: '',
+        paymentTime: ''
       },
       ruleInline: {
         customer: [
@@ -169,17 +178,21 @@ export default {
       }
     },
     getDetail () {
-      if (this.customerId !== '0') {
+      if (this.currentId && this.currentId !== '' && this.currentId !== '0') {
         PostWithAuth('deliveryNoteApi/detail/' + this.currentId, {}).then(res => {
           if (res.data.code === '200') {
             let data = res.data.data
             this.formInline = data.deliveryNote
+            this.formInline.paymentTime = new Date(data.deliveryNote.paymentTime)
             // this.formInline.deliveryDate = new Date(data.deliveryDate)
           } else {
             this.$Message.error('获取订单详情失败')
           }
         })
       }
+    },
+    onDataChange2 (dateStr, date) {
+      this.formInline.paymentTime = dateStr
     }
   },
   mounted () {

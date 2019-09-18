@@ -43,25 +43,7 @@ export default [
       clearable: true,
       placeholder: '请输入送货单号'
     }
-  },
-  {
-    type: 'input',
-    title: '司机',
-    field: 'driver',
-    props: {
-      clearable: true,
-      placeholder: '请输入司机'
-    }
-  },
-  {
-    type: 'input',
-    title: '车牌号',
-    field: 'carNum',
-    props: {
-      clearable: true,
-      placeholder: '请输入车牌号'
-    }
-  },
+  }
   // {
   //   type: 'input',
   //   title: '开单时间',
@@ -71,14 +53,14 @@ export default [
   //     placeholder: '请输入开单时间'
   //   }
   // },
-  {
-    type: 'input',
-    title: '开单人',
-    field: 'createUser',
-    props: {
-      clearable: true,
-      placeholder: '请输入开单人'
-    }
+  // {
+  //   type: 'input',
+  //   title: '开单人',
+  //   field: 'createUser',
+  //   props: {
+  //     clearable: true,
+  //     placeholder: '请输入开单人'
+  //   }
   // },
   // {
   //   type: 'input',
@@ -106,5 +88,5 @@ export default [
   //     clearable: true,
   //     placeholder: '请输入收货人'
   //   }
-  }
+  // }
 ]

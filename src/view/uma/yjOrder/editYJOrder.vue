@@ -131,6 +131,22 @@
                      :min="0"
                      v-model="formInline.perPackQuantity"></InputNumber>
       </FormItem>
+      <FormItem prop="alertDay"
+                label="预警天数">
+        <InputNumber :step="1"
+                     :min="0"
+                     v-model="formInline.alertDay"></InputNumber>
+      </FormItem>
+      <FormItem prop="lookboardThreshold"
+                label="看板显示阈值">
+        <InputNumber :step="1"
+                     :min="0"
+                     :max="100"
+                     :precision="2"
+                     :formatter="value => `${value}%`"
+                     :parser="value => value.replace('%', '')"
+                     v-model="formInline.lookboardThreshold"></InputNumber>
+      </FormItem>
       <FormItem prop="requirement"
                 label="工艺要求">
         <Input type="textarea"
@@ -179,7 +195,9 @@ export default {
         deliveryDate: '',
         clientId: 0,
         clientName: '',
-        floor: ''
+        floor: '',
+        alertDay: 4,
+        lookboardThreshold: 80
       },
       ruleInline: {
         name: [
@@ -504,5 +522,8 @@ export default {
   padding: 10px 16px;
   text-align: right;
   background: #fff;
+}
+.ivu-input-number {
+  width: 100% !important;
 }
 </style>

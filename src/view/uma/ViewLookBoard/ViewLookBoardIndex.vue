@@ -212,11 +212,17 @@ export default {
 </script>
 
 <style>
+#app {
+  background-color: black;
+}
 .ivu-table td {
   font-size: 25px;
+  background-color: black;
 }
 .ivu-table th {
   font-size: 25px;
+  color: white;
+  background-color: black;
 }
 .ivu-table .lookboard-error td {
   background-color: #f52d2d;
