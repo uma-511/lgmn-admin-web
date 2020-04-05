@@ -34,6 +34,14 @@
                      @on-save-success="onAdded"
                      @on-update-success="onAdded"
                      @on-value-change="onshowStatusChange"></DynamicForm>
+        <DynamicForm v-bind:value='updatePwdModel'
+                     :width='600'
+                     :status='formStatus'
+                     :formData='updatePwdFormData'
+                     :updateUrl='updatePwdUrl'
+                     :detailUrl='detailUrl'
+                     :currentId='currentId'
+                     @on-value-change="onUpdatePwdShowStatusChange"></DynamicForm>
       </Card>
     </CarouselItem>
     <CarouselItem>
@@ -54,6 +62,7 @@ import addUserForm from './form/add-user-form'
 import editUserForm from './form/edit-user-form'
 import detailUserForm from './form/detail-user-form'
 import searchFormData from './form/search-user-form'
+import updatePwdForm from './form/update-password'
 import UserRole from '../../system/userRole/userRole'
 export default {
   components: {
@@ -74,11 +83,14 @@ export default {
         arrow: 'never'
       },
       addModel: false,
+      updatePwdModel: false,
       formData: [],
+      updatePwdFormData: [],
       createUrl: 'user/add',
       updateUrl: 'user/update',
       deleteUrl: 'user/delete',
       detailUrl: 'user/detail',
+      updatePwdUrl: 'user/updatepwd',
       currentId: '',
       formStatus: '',
       tableData: [],
@@ -139,6 +151,19 @@ export default {
                   }
                 }
               }, '设置角色')
+            },
+            (h, params, vm) => {
+              return h('Button', {
+                props: {
+                  type: 'info',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.updatePwd(params.row)
+                  }
+                }
+              }, '修改密码')
             }
           ]
         }
@@ -176,8 +201,18 @@ export default {
         }
       })
     },
+    async updatePwd (item) {
+      const _f = clone(updatePwdForm)
+      this.updatePwdModel = true
+      this.updatePwdFormData = _f
+      this.formStatus = 'edit'
+      this.currentId = item.id
+    },
     onshowStatusChange (val) {
       this.addModel = val
+    },
+    onUpdatePwdShowStatusChange (val) {
+      this.updatePwdModel = val
     },
     toSetRole (row) {
       this.carouselIndex = 1

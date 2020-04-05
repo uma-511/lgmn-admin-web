@@ -19,15 +19,6 @@ export default [
   },
   {
     type: 'input',
-    title: '地址',
-    field: 'address',
-    props: {
-      clearable: true,
-      placeholder: '请输入地址'
-    }
-  },
-  {
-    type: 'input',
     title: '联系电话',
     field: 'phone',
     props: {

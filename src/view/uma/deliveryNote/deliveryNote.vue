@@ -1,22 +1,24 @@
 <template>
   <Card>
-    <tables border
-            editable
-            ref="table"
-            search-place="top"
-            :columns='columns'
-            v-model='tableData'
-            @on-edit="edit"
-            @on-delete="remove"
-            @on-detail="detail"
-            @on-add-click="add"
-            :addable="true"
-            :searchable="true"
-            :searchForm="searchForm"
-            :queryOrders="orders"
-            dataUrl='deliveryNoteApi/page'
-            size='small'
-            :height='tableHeight'></tables>
+    <tables
+      border=""
+      editable
+      ref="table"
+      search-place="top"
+      :columns="columns"
+      v-model="tableData"
+      @on-edit="edit"
+      @on-delete="remove"
+      @on-detail="detail"
+      @on-add-click="add"
+      :addable="true"
+      :searchable="true"
+      :searchForm="searchForm"
+      :queryOrders="orders"
+      data-url="deliveryNoteApi/page"
+      size="small"
+      :height="tableHeight"
+    ></tables>
     <!-- <DynamicForm v-bind:value='addModel'
                  :width='600'
                  :status='formStatus'
@@ -26,35 +28,31 @@
                  :detailUrl='detailUrl'
                  :currentId='currentId'
                  @on-value-change="onshowStatusChange"
-                 @on-submit-success="getData"></DynamicForm> -->
-    <Modal v-model="showModal"
-           fullscreen
-           title="出库单编辑">
-      <p slot="header"
-         style="height:50px;color:#f60;text-align:center">
+    @on-submit-success="getData"></DynamicForm>-->
+    <Modal v-model="showModal" fullscreen title="出库单编辑">
+      <p slot="header" style="height:50px;color:#f60;text-align:center">
         <Icon type="ios-information-circle"></Icon>
         <span>出库单编辑</span>
-        <Button type="success"
-                style="margin-left:100px;"
-                @click="exportExcel">导出Excel</Button>
+        <Button type="success" style="margin-left:100px;" @click="exportExcel">导出Excel</Button>
       </p>
-      <DeliveryList ref="deliveryList"
-                    :currentId="currentId"></DeliveryList>
-      <p slot="footer">
-      </p>
+      <DeliveryList ref="deliveryList" :currentId="currentId"></DeliveryList>
+      <p slot="footer"></p>
     </Modal>
-    <AddDeliveryNote v-model="addModel"
-                     :clients="clientList"
-                     :width='600'
-                     @on-added="onAdded"
-                     @on-value-change="onAddStatusChange"></AddDeliveryNote>
-
-    <EditDeliveryNote v-model="editModel"
-                      :clients="clientList"
-                      :width='600'
-                      :currentId="currentId"
-                      @on-added="onAdded"
-                      @on-value-change="onEditStatusChange"></EditDeliveryNote>
+    <AddDeliveryNote
+      v-model="addModel"
+      :clients="clientList"
+      :width="600"
+      @on-added="onAdded"
+      @on-value-change="onAddStatusChange"
+    ></AddDeliveryNote>
+    <EditDeliveryNote
+      v-model="editModel"
+      :clients="clientList"
+      :width="600"
+      :currentId="currentId"
+      @on-added="onAdded"
+      @on-value-change="onEditStatusChange"
+    ></EditDeliveryNote>
   </Card>
 </template>
 
@@ -67,7 +65,7 @@ import DynamicForm from '_c/dynamic-form'
 // import addForm from './form/add-deliveryNote-form'
 // import editForm from './form/edit-deliveryNote-form'
 // import detailForm from './form/detail-deliveryNote-form'
-// import searchFormData from './form/search-deliveryNote-form'
+import searchFormData from './form/search-deliveryNote-form'
 import DeliveryList from '../deliveryList/deliveryList'
 import AddDeliveryNote from './addDeliveryNote'
 import EditDeliveryNote from './editDeliveryNote'
@@ -153,7 +151,15 @@ export default {
           width: 100,
           render: (h, { row }) => {
             const ts = row.hadPaid === 1 ? '是' : '否'
-            return h('div', ts)
+            const prop = {
+              color: row.hadPaid === 1 ? 'success' : 'error'
+            }
+            return h('Tag',
+              {
+                props: prop
+              },
+              ts
+            )
           }
         }, {
           title: '确认回款人',
@@ -308,7 +314,7 @@ export default {
     }
   },
   mounted () {
-    // this.searchForm = searchFormData
+    this.searchForm = searchFormData
     this.getClientList()
   }
 }

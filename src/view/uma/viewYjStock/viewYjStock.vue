@@ -1,32 +1,38 @@
 <template>
   <Card>
-    <SearchYJStock :names="nameList"
-                   :specses="specsList"
-                   :widths="widthList"
-                   :colors="colorList"
-                   @on-search-click="search"></SearchYJStock>
-    <tables border
-            editable
-            ref='table'
-            search-place="top"
-            :columns='columns'
-            v-model='tableData'
-            @on-edit="edit"
-            @on-delete="remove"
-            @on-detail="detail"
-            @on-add-click="add"
-            dataUrl='/viewYjStockApi/page'
-            size='small'
-            :height='tableHeight'></tables>
-    <DynamicForm v-bind:value='addModel'
-                 :width='600'
-                 :status='formStatus'
-                 :formData='formData'
-                 :createUrl='createUrl'
-                 :updateUrl='updateUrl'
-                 :detailUrl='detailUrl'
-                 :currentId='currentId'
-                 @on-value-change="onshowStatusChange"></DynamicForm>
+    <SearchYJStock
+      :names="nameList"
+      :specses="specsList"
+      :widths="widthList"
+      :colors="colorList"
+      @on-search-click="search"
+    ></SearchYJStock>
+    <tables
+      border=""
+      editable
+      ref="table"
+      search-place="top"
+      :columns="columns"
+      v-model="tableData"
+      @on-edit="edit"
+      @on-delete="remove"
+      @on-detail="detail"
+      @on-add-click="add"
+      data-url="/viewYjStockApi/page"
+      size="small"
+      :height="tableHeight"
+    ></tables>
+    <DynamicForm
+      v-bind:value="addModel"
+      :width="600"
+      :status="formStatus"
+      :formData="formData"
+      :createUrl="createUrl"
+      :updateUrl="updateUrl"
+      :detailUrl="detailUrl"
+      :currentId="currentId"
+      @on-value-change="onshowStatusChange"
+    ></DynamicForm>
   </Card>
 </template>
 
@@ -42,7 +48,7 @@ export default {
     DynamicForm,
     SearchYJStock
   },
-  data () {
+  data() {
     return {
       nameList: [{ id: 0, value: '' }],
       specsList: [{ id: 0, value: '' }],
@@ -69,6 +75,9 @@ export default {
           width: 70,
           align: 'center'
         }, {
+          title: '编号',
+          key: 'number'
+        }, {
           title: '名称',
           key: 'name'
         }, {
@@ -81,24 +90,27 @@ export default {
           title: '颜色',
           key: 'color'
         }, {
-          title: '库存',
+          title: '库存包数',
           key: 'stock'
+        }, {
+          title: '库存卷数',
+          key: 'stockQuantity'
         }
       ]
     }
   },
   methods: {
-    async add () {
+    async add() {
     },
-    async edit (item) {
+    async edit(item) {
     },
-    async detail (item) {
+    async detail(item) {
     },
-    async remove (item) {
+    async remove(item) {
     },
-    onshowStatusChange (val) {
+    onshowStatusChange(val) {
     },
-    getConfigList () {
+    getConfigList() {
       PostWithAuth('umaConfigApi/group', {}).then(res => {
         if (res.data.code === '200') {
           const configs = res.data.data.configs
@@ -112,11 +124,11 @@ export default {
         }
       })
     },
-    search (data) {
+    search(data) {
       this.$refs['table'].getData(data)
     }
   },
-  mounted () {
+  mounted() {
     this.searchForm = searchFormData
     this.getConfigList()
   }

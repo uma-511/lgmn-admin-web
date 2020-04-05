@@ -11,9 +11,8 @@
       <Col span="6">制单人：{{this.deliveryNote.createUser}}</Col>
     </Row>
     <Row>
-      <Col span="6">联系地址：{{this.customer.logisticsAddress}}</Col>
-      <Col span="6"
-           offset="6">制单时间：{{createDate}}</Col>
+      <Col span="12">联系地址：{{this.customer.logisticsAddress}}</Col>
+      <Col span="6">制单时间：{{createDate}}</Col>
       </Col>
     </Row>
     <Table border

@@ -179,7 +179,7 @@ export default {
         labelName: '',
         requirement: '',
         plannedQuantity: 0,
-        perPackQuantity: 0,
+        perPackQuantity: 30,
         remark: '',
         deliveryDate: '',
         clientId: 0,
@@ -327,6 +327,25 @@ export default {
               // this.$Message.success('添加成功')
               this.showStatus = false
               this.$refs['formInline'].resetFields()
+              this.formInline = {
+                number: '',
+                name: '',
+                specs: '',
+                width: '',
+                color: '',
+                labelId: 0,
+                labelName: '',
+                requirement: '',
+                plannedQuantity: 0,
+                perPackQuantity: 30,
+                remark: '',
+                deliveryDate: '',
+                clientId: 0,
+                clientName: '',
+                floor: '',
+                alertDay: 4,
+                lookboardThreshold: 100
+              }
               this.$emit('on-added')
             } else {
               this.$Message.error('添加失败')
@@ -375,10 +394,10 @@ export default {
       this.clientList = [{ id: 0, name: '' }]
     },
     onSelectChange (value) {
-      if (value && this.formInline.name !== '' && this.formInline.specs !== '' && this.formInline.width !== '' && this.formInline.color !== '') {
-        let dto = { name: this.formInline.name, specs: this.formInline.specs, width: this.formInline.width, str1: this.formInline.color }
-        this.queryNumber(dto)
-      }
+      // if (value && this.formInline.name !== '' && this.formInline.specs !== '' && this.formInline.width !== '' && this.formInline.color !== '') {
+      //   let dto = { name: this.formInline.name, specs: this.formInline.specs, width: this.formInline.width, str1: this.formInline.color }
+      //   this.queryNumber(dto)
+      // }
     },
     findNumberFilter (item) {
       if (this.formInline.name === item.name && this.formInline.specs === item.specs && this.formInline.width === item.width && this.formInline.color === item.str1) {

@@ -1,44 +1,45 @@
 <template>
   <Card>
-    <tables border
-            editable
-            ref="table"
-            search-place="top"
-            :columns='columns'
-            @on-edit="edit"
-            @on-delete="remove"
-            @on-detail="detail"
-            @on-add-click="add"
-            :addable="true"
-            :searchable="true"
-            :searchForm="searchForm"
-            :queryOrders='orders'
-            dataUrl='customerApi/page'
-            size='small'
-            :height='tableHeight'></tables>
-    <DynamicForm v-model='addModel'
-                 :width='600'
-                 :status='formStatus'
-                 :formData='formData'
-                 :createUrl='createUrl'
-                 :updateUrl='updateUrl'
-                 :detailUrl='detailUrl'
-                 :currentId='currentId'
-                 @on-value-change="onshowStatusChange"
-                 @on-add-success="getData"
-                 @on-update-success="getData"
-                 @on-submit-success="getData"></DynamicForm>
-    <Drawer v-model="showContact"
-            width='90%'
-            :mask-closable="false"
-            :title='showContactTitle'>
-      <CustomerContact :id='id'></CustomerContact>
+    <tables
+      border=""
+      editable
+      ref="table"
+      search-place="top"
+      :columns="columns"
+      @on-edit="edit"
+      @on-delete="remove"
+      @on-detail="detail"
+      @on-add-click="add"
+      :addable="true"
+      :searchable="true"
+      :searchForm="searchForm"
+      :queryOrders="orders"
+      data-url="customerApi/page"
+      size="small"
+      :height="tableHeight"
+    ></tables>
+    <DynamicForm
+      v-model="addModel"
+      :width="600"
+      :status="formStatus"
+      :formData="formData"
+      :createUrl="createUrl"
+      :updateUrl="updateUrl"
+      :detailUrl="detailUrl"
+      :currentId="currentId"
+      @on-value-change="onshowStatusChange"
+      @on-add-success="getData"
+      @on-update-success="getData"
+      @on-submit-success="getData"
+    ></DynamicForm>
+    <Drawer v-model="showContact" width="90%" :mask-closable="false" :title="showContactTitle">
+      <CustomerContact :id="id"></CustomerContact>
     </Drawer>
   </Card>
 </template>
 
 <script>
-import { clone, getDateStr } from '@/libs/tools'
+import { clone } from '@/libs/tools'
 import { PostWithAuth } from '@/api/global'
 import Tables from '_c/tables'
 import DynamicForm from '_c/dynamic-form'
@@ -110,17 +111,17 @@ export default {
         }, {
           title: '备注',
           key: 'remark'
-        }, {
-          title: '创建用户',
-          key: 'createUser'
-        }, {
-          type: 'DatePicker',
-          title: '创建时间',
-          key: 'createTime',
-          render: (h, { row }) => {
-            const ts = row.createTime
-            return h('div', getDateStr(ts, 'date'))
-          }
+          // }, {
+          //   title: '创建用户',
+          //   key: 'createUser'
+          // }, {
+          //   type: 'DatePicker',
+          //   title: '创建时间',
+          //   key: 'createTime',
+          //   render: (h, { row }) => {
+          //     const ts = row.createTime
+          //     return h('div', getDateStr(ts, 'date'))
+          //   }
         }, {
           key: 'handle',
           renderHeader (h, { column, index }) {

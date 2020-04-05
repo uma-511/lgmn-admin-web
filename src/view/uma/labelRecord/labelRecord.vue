@@ -1,34 +1,38 @@
 <template>
   <Card>
-    <tables border
-            editable
-            search-place="top"
-            :columns='columns'
-            v-model='tableData'
-            @on-edit="edit"
-            @on-delete="remove"
-            @on-detail="detail"
-            @on-add-click="add"
-            :addable="false"
-            :searchable="true"
-            :searchForm="searchForm"
-            dataUrl='viewLabelRecordApi/page'
-            size='small'
-            :height='tableHeight'></tables>
-    <DynamicForm v-bind:value='addModel'
-                 :width='600'
-                 :status='formStatus'
-                 :formData='formData'
-                 :createUrl='createUrl'
-                 :updateUrl='updateUrl'
-                 :detailUrl='detailUrl'
-                 :currentId='currentId'
-                 @on-value-change="onshowStatusChange"></DynamicForm>
+    <tables
+      border=""
+      editable
+      search-place="top"
+      :columns="columns"
+      v-model="tableData"
+      @on-edit="edit"
+      @on-delete="remove"
+      @on-detail="detail"
+      @on-add-click="add"
+      :addable="false"
+      :searchable="true"
+      :searchForm="searchForm"
+      data-url="viewLabelRecordApi/page"
+      size="small"
+      :height="tableHeight"
+    ></tables>
+    <DynamicForm
+      v-bind:value="addModel"
+      :width="600"
+      :status="formStatus"
+      :formData="formData"
+      :createUrl="createUrl"
+      :updateUrl="updateUrl"
+      :detailUrl="detailUrl"
+      :currentId="currentId"
+      @on-value-change="onshowStatusChange"
+    ></DynamicForm>
   </Card>
 </template>
 
 <script>
-import { clone } from '@/libs/tools'
+import { clone, getDateStr } from '@/libs/tools'
 import Tables from '_c/tables'
 import DynamicForm from '_c/dynamic-form'
 import addForm from './form/add-labelRecord-form'
@@ -102,12 +106,8 @@ export default {
           title: '生产日期',
           key: 'prodTime',
           render: (h, { row }) => {
-            return h('Time', {
-              props: {
-                time: parseInt(row.prodTime),
-                type: 'datetime'
-              }
-            })
+            const createTime = row.prodTime
+            return h('div', getDateStr(createTime, 'year'))
           }
         }, {
           title: '存储状态',

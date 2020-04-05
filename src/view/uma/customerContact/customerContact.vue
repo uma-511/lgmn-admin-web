@@ -1,39 +1,43 @@
 <template>
   <Card>
-    <tables border
-            editable
-            ref="table"
-            search-place="top"
-            :columns='columns'
-            v-model='tableData'
-            @on-edit="edit"
-            @on-delete="remove"
-            @on-detail="detail"
-            @on-add-click="add"
-            :addable="true"
-            :searchable="true"
-            :searchForm="searchForm"
-            dataUrl='customerContactApi/page'
-            size='small'
-            :height='tableHeight'></tables>
-    <DynamicForm v-model='addModel'
-                 :width='600'
-                 :transfer="false"
-                 :inner="true"
-                 :status='formStatus'
-                 :formData='formData'
-                 :createUrl='createUrl'
-                 :updateUrl='updateUrl'
-                 :detailUrl='detailUrl'
-                 :currentId='currentId'
-                 @on-value-change="onshowStatusChange"
-                 @on-submit-success="getData"></DynamicForm>
+    <tables
+      border=""
+      editable
+      ref="table"
+      search-place="top"
+      :columns="columns"
+      v-model="tableData"
+      @on-edit="edit"
+      @on-delete="remove"
+      @on-detail="detail"
+      @on-add-click="add"
+      :addable="true"
+      :searchable="true"
+      :searchForm="searchForm"
+      data-url="customerContactApi/page"
+      size="small"
+      :height="tableHeight"
+    ></tables>
+    <DynamicForm
+      v-model="addModel"
+      :width="600"
+      :transfer="false"
+      :inner="true"
+      :status="formStatus"
+      :formData="formData"
+      :createUrl="createUrl"
+      :updateUrl="updateUrl"
+      :detailUrl="detailUrl"
+      :currentId="currentId"
+      @on-value-change="onshowStatusChange"
+      @on-submit-success="getData"
+    ></DynamicForm>
     <!-- <MyAddForm :value='myAddForm' @on-value-change="onAddFormStatusChange" @on-added="onAdded"></MyAddForm> -->
   </Card>
 </template>
 
 <script>
-import { clone } from '@/libs/tools'
+import { clone, getDateStr } from '@/libs/tools'
 import { PostWithAuth } from '@/api/global'
 import Tables from '_c/tables'
 import DynamicForm from '_c/dynamic-form'
@@ -71,12 +75,12 @@ export default {
           type: 'index',
           width: 70,
           align: 'center'
-        // }, {
-        //   title: 'ID',
-        //   key: 'id'
-        // }, {
-        //   title: '客户id',
-        //   key: 'customerId'
+          // }, {
+          //   title: 'ID',
+          //   key: 'id'
+          // }, {
+          //   title: '客户id',
+          //   key: 'customerId'
         }, {
           title: '联系人姓名',
           key: 'name'
@@ -96,12 +100,8 @@ export default {
           title: '创建时间',
           key: 'createTime',
           render: (h, { row }) => {
-            return h('Time', {
-              props: {
-                time: parseInt(row.createTime),
-                type: 'datetime'
-              }
-            })
+            const createTime = row.createTime
+            return h('div', getDateStr(createTime, 'year'))
           }
         }, {
           key: 'handle',
