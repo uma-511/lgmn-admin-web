@@ -191,6 +191,11 @@ export default {
       this.$refs['table'].getData()
     },
     getData () {
+      let pageInfo = this.$refs['table'].getPageInfo()
+      let totalPage = pageInfo.totalPage
+      let nextPage = this.criteria.pageNumber + 1
+
+      this.criteria.pageNumber = nextPage < totalPage? nextPage:0
       this.$refs['table'].getData(this.criteria)
     },
     rowClassName (row, index) {

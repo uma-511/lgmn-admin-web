@@ -235,6 +235,7 @@ export default {
       searchKey: '',
       formDynamic: [],
       totalCount: 0,
+      totalPage: 0,
       postData: {
         pageNumber: 0,
         pageSize: 10
@@ -385,34 +386,42 @@ export default {
           if (res) {
             this.insideTableData = res.data.data.list
             this.totalCount = res.data.data.count
+            this.totalPage = res.data.data.totalPage
           }
         })
       }
+    },
+    getPageInfo() {
+      let pageInfo = {
+        totalCount: this.totalCount,
+        totalPage: this.totalPage
+      }
+      return pageInfo
     }
   },
   watch: {
-    searchForm(val) {
+    searchForm (val) {
       const _d = val
       this.formDynamic = _d
     },
-    columns(columns) {
+    columns (columns) {
       this.handleColumns(columns)
       this.setDefaultSearchKey()
     },
-    value(val) {
+    value (val) {
       this.handleTableData()
       if (this.searchable) this.handleSearch()
     },
-    paging(val) {
+    paging (val) {
       if (!val) {
         this.postData.pageSize = 99999
       }
     },
-    queryOrders(val) {
+    queryOrders (val) {
       this.postOrders = val
     }
   },
-  mounted() {
+  mounted () {
     this.handleColumns(this.columns)
     if (this.autoLoad) {
       this.getData()
