@@ -10,7 +10,18 @@
           :label-width="100">
       <FormItem label="编号"
                 prop="number">
-        <Select v-model="formInline.number"
+        <AutoComplete
+        v-model="formInline.number"
+        :data="numberData"
+        @on-search="remoteNumber"
+        @on-clear="cleanNumber"
+        @on-select="onNumberChange"
+        clearable
+        transfer
+        placement="bottom"
+        placeholder="输入编号"
+        ></AutoComplete>
+        <!-- <Select v-model="formInline.number"
                 ref='number'
                 @on-change="onNumberChange"
                 @on-clear="onNumberClear"
@@ -24,7 +35,7 @@
                   :value="item.id"
                   :label="item.num"
                   :key="item.id">{{ item.num }}</Option>
-        </Select>
+        </Select> -->
       </FormItem>
       <FormItem prop="name"
                 label="名称">
@@ -213,10 +224,12 @@ export default {
         label: 0,
         value: ''
       },
+      selectedNumber: '',
       clientValue: {
         label: 0,
         value: ''
-      }
+      },
+      numberData: []
     }
   },
   watch: {
@@ -246,20 +259,20 @@ export default {
     },
     labels (val) {
       this.labelList = val
-    },
-    numbers (val) {
-      this.numberList = val
-    },
-    numberList (val) {
-      if (val.length === 1) {
-        this.formInline.number = val[0].num
-        this.$refs['number'].setQuery(val[0].num)
-      } else if (val.length > 1) {
-        // this.$refs['number'].setQuery(val[0].num)
-      } else {
-        this.formInline.number = ''
-      }
     }
+    // numbers (val) {
+    //   this.numberList = val
+    // },
+    // numberList (val) {
+    //   if (val.length === 1) {
+    //     this.formInline.number = val[0].num
+    //     this.$refs['number'].setQuery(val[0].num)
+    //   } else if (val.length > 1) {
+    //     // this.$refs['number'].setQuery(val[0].num)
+    //   } else {
+    //     this.formInline.number = ''
+    //   }
+    // }
   },
   props: {
     width: Number,
@@ -361,7 +374,8 @@ export default {
     },
     onNumberChange (value) {
       if (value && value.value !== '') {
-        this.numberValue = value
+        // this.numberValue = value
+        this.selectedNumber = value
         let selectedNum = this.numberList.filter(this.numberFilter)
         this.formInline.name = selectedNum[0].name
         this.formInline.specs = selectedNum[0].specs
@@ -375,7 +389,10 @@ export default {
       }
     },
     numberFilter (item) {
-      if (this.numberValue.value === item.id) {
+      // if (this.numberValue.value === item.id) {
+      //   return true
+      // }
+      if (this.selectedNumber === item.num) {
         return true
       }
     },
@@ -428,6 +445,9 @@ export default {
     onDataChange (dateStr, date) {
       this.formInline.deliveryDate = dateStr
     },
+    cleanNumber () {
+      this.numberData = []
+    },
     remoteNumber (query) {
       if (query !== '' && this.numberValue.label !== query) {
         let dto = { num: query }
@@ -442,6 +462,18 @@ export default {
           const data = res.data.data
           this.numberList = data
           this.loadingNumber = false
+          let numberArray = []
+          let len = data.length
+          len = len > 20 ? 20 : len
+          if (len > 0) {
+            for (var i = 0; i < len; i++) {
+              if (numberArray.indexOf(data[i].num) >= 0) {
+                continue
+              }
+              numberArray.push(data[i].num)
+            }
+          }
+          this.numberData = numberArray
         } else {
           this.$Message.error('获取编号失败')
           this.loadingNumber = false
