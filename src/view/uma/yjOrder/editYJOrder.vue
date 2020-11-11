@@ -15,7 +15,7 @@
         :data="numberData"
         @on-search="remoteNumber"
         @on-clear="cleanNumber"
-        @on-select="onNumberChange"
+        @on-change="onNumberChange"
         clearable
         transfer
         placement="bottom"
@@ -363,11 +363,11 @@ export default {
         if (val) {
           PostWithAuth('yjOrderApi/update', this.formInline).then(res => {
             if (res.data.code === '200') {
-              this.$Message.success('添加成功')
+              this.$Message.success('修改成功')
               this.showStatus = false
               this.$emit('on-added')
             } else {
-              this.$Message.error('添加失败')
+              this.$Message.error('修改失败')
             }
           })
         } else {
@@ -383,11 +383,13 @@ export default {
         // this.numberValue = value
         this.selectedNumber = value
         let selectedNum = this.numberList.filter(this.numberFilter)
-        this.formInline.number = value.label
-        this.formInline.name = selectedNum[0].name
-        this.formInline.specs = selectedNum[0].specs
-        this.formInline.width = selectedNum[0].width
-        this.formInline.color = selectedNum[0].str1
+        this.formInline.number = value
+        if (selectedNum.length) {
+          this.formInline.name = selectedNum[0].name
+          this.formInline.specs = selectedNum[0].specs
+          this.formInline.width = selectedNum[0].width
+          this.formInline.color = selectedNum[0].str1
+        }
       }
     },
     onClientChange (value) {

@@ -15,7 +15,7 @@
         :data="numberData"
         @on-search="remoteNumber"
         @on-clear="cleanNumber"
-        @on-select="onNumberChange"
+        @on-change="onNumberChange"
         clearable
         transfer
         placement="bottom"
@@ -334,7 +334,7 @@ export default {
           let saveDto = clone(this.formInline)
           saveDto.clientId = this.clientValue.value
           saveDto.clientName = this.clientValue.label
-          saveDto.number = this.numberValue.label
+          saveDto.number = this.selectedNumber
           PostWithAuth('yjOrderApi/add', saveDto).then(res => {
             if (res.data.code === '200') {
               // this.$Message.success('添加成功')
@@ -373,14 +373,18 @@ export default {
       this.showStatus = false
     },
     onNumberChange (value) {
-      if (value && value.value !== '') {
+      console.log(value)
+      if (value) {
         // this.numberValue = value
         this.selectedNumber = value
         let selectedNum = this.numberList.filter(this.numberFilter)
-        this.formInline.name = selectedNum[0].name
-        this.formInline.specs = selectedNum[0].specs
-        this.formInline.width = selectedNum[0].width
-        this.formInline.color = selectedNum[0].str1
+        this.formInline.number = value
+        if (selectedNum.length) {
+          this.formInline.name = selectedNum[0].name
+          this.formInline.specs = selectedNum[0].specs
+          this.formInline.width = selectedNum[0].width
+          this.formInline.color = selectedNum[0].str1
+        }
       }
     },
     onClientChange (value) {

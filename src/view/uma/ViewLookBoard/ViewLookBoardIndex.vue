@@ -1,25 +1,27 @@
 <template>
   <!-- <ViewLookBoardAddForm @on-add-click="add"
                           @on-search-click="search">
-    </ViewLookBoardAddForm> -->
-  <tables border
-          editable
-          ref='table'
-          search-place="top"
-          :columns='columns'
-          v-model='tableData'
-          @on-edit="edit"
-          @on-delete="remove"
-          @on-detail="detail"
-          @on-add-click="add"
-          :addable="false"
-          :searchable="false"
-          :searchForm="searchForm"
-          :dataUrl='queryUrl'
-          :paging='false'
-          :height='tableHeight'
-          :autoLoad='false'
-          :row-class-name="rowClassName"></tables>
+  </ViewLookBoardAddForm>-->
+  <tables
+    border=""
+    editable
+    ref="table"
+    search-place="top"
+    :columns="columns"
+    v-model="tableData"
+    @on-edit="edit"
+    @on-delete="remove"
+    @on-detail="detail"
+    @on-add-click="add"
+    :addable="false"
+    :searchable="false"
+    :searchForm="searchForm"
+    :dataUrl="queryUrl"
+    :paging="false"
+    :height="tableHeight"
+    :autoLoad="false"
+    :row-class-name="rowClassName"
+  ></tables>
   <!-- <ViewLookBoardAddForm v-model="addModel"
                           :saveUrl='createUrl'
                           @on-added="onAdded"
@@ -35,7 +37,7 @@
     <ViewLookBoardDetailForm v-model="detailModel"
                              :detailUrl='detailUrl'
                              :currentId="currentId">
-    </ViewLookBoardDetailForm> -->
+  </ViewLookBoardDetailForm>-->
 </template>
 
 <script>
@@ -71,27 +73,41 @@ export default {
       tableData: [],
       searchForm: [],
       totalCount: 0,
-      criteria: { pageNumber: 0, pageSize: 15 },
+      criteria: { pageNumber: 0, pageSize: 10 },
       tableHeight: 0,
       columns: [
         {
           title: '序号',
-          type: 'index',
-          width: 50,
-          align: 'center'
+          width: 70,
+          align: 'center',
+          render: (h, { index }) => {
+            const number = this.criteria.pageNumber * this.criteria.pageSize + index + 1
+            return h('div', number)
+          }
         },
         {
           title: '生产单号',
           key: 'orderNum',
-          width: 190
+          width: 185
+        },
+        {
+          title: '编号',
+          key: 'number',
+          width: 160
         },
         // {
-        //   title: '客户代码',
-        //   key: 'customerCode'
+        //   title: '制单日期',
+        //   key: 'createTime',
+        //   width: 110,
+        //   render: (h, { row }) => {
+        //     const createTime = row.createTime
+        //     return h('div', getDateStr(createTime, 'month'))
+        //   }
         // },
         {
           title: '名称',
-          key: 'name'
+          key: 'name',
+          ellipsis: true
         },
         {
           title: '规格',
@@ -105,11 +121,12 @@ export default {
         },
         {
           title: '颜色',
-          key: 'color'
+          key: 'color',
+          width: 150
         },
         {
           title: '进度',
-          width: 220,
+          width: 160,
           render: (h, { row }) => {
             return h('div', row.finishedQuantity + '/' + row.plannedQuantity)
           }
@@ -130,24 +147,15 @@ export default {
             const createTime = row.deliveryDate
             return h('div', getDateStr(createTime, 'month'))
           }
-        },
-        {
-          title: '制单日期',
-          key: 'createTime',
-          width: 110,
-          render: (h, { row }) => {
-            const createTime = row.createTime
-            return h('div', getDateStr(createTime, 'month'))
-          }
-        },
-        {
-          title: '超出天数',
-          key: 'overDate',
-          width: 90,
-          render: (h, { row }) => {
-            const overDate = row.overDate > 0 ? row.overDate : 0
-            return h('div', overDate)
-          }
+        // },
+        // {
+        //   title: '超出天数',
+        //   key: 'overDate',
+        //   width: 90,
+        //   render: (h, { row }) => {
+        //     const overDate = row.overDate > 0 ? row.overDate : 0
+        //     return h('div', overDate)
+        //   }
         }
       ]
     }
@@ -195,7 +203,7 @@ export default {
       let totalPage = pageInfo.totalPage
       let nextPage = this.criteria.pageNumber + 1
 
-      this.criteria.pageNumber = nextPage < totalPage? nextPage:0
+      this.criteria.pageNumber = nextPage < totalPage ? nextPage : 0
       this.$refs['table'].getData(this.criteria)
     },
     rowClassName (row, index) {

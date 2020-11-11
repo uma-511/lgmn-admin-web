@@ -1,29 +1,22 @@
 export default [
   {
+    type: 'DatePicker',
+    field: 'createDates',
+    title: '制单日期',
+    value: ['', ''],
+    props: {
+      'type': 'datetimerange',
+      'format': 'yyyy-MM-dd',
+      'placeholder': '请选择制单日期'
+    }
+  },
+  {
     type: 'input',
     title: '客户名称',
-    field: 'customer',
+    field: 'clientName',
     props: {
       clearable: true,
       placeholder: '请输入客户名称'
-    }
-  },
-  {
-    type: 'input',
-    title: '联系人',
-    field: 'contact',
-    props: {
-      clearable: true,
-      placeholder: '请输入联系人'
-    }
-  },
-  {
-    type: 'input',
-    title: '联系电话',
-    field: 'phone',
-    props: {
-      clearable: true,
-      placeholder: '请输入联系电话'
     }
   },
   {
@@ -34,50 +27,50 @@ export default [
       clearable: true,
       placeholder: '请输入送货单号'
     }
+  },
+  {
+    type: 'input',
+    title: '产品编号',
+    field: 'number',
+    props: {
+      clearable: true,
+      placeholder: '请输入产品编号'
+    }
+  },
+  {
+    type: 'input',
+    title: '产品名称',
+    field: 'name',
+    props: {
+      clearable: true,
+      placeholder: '请输入产品名称'
+    }
+  },
+  {
+    type: 'input',
+    title: '规格',
+    field: 'specs',
+    props: {
+      clearable: true,
+      placeholder: '请输入规格'
+    }
+  },
+  {
+    type: 'input',
+    title: '色号',
+    field: 'color',
+    props: {
+      clearable: true,
+      placeholder: '请输入色号'
+    }
+  },
+  {
+    type: 'input',
+    title: '宽度',
+    field: 'color',
+    props: {
+      clearable: true,
+      placeholder: '请输入宽度'
+    }
   }
-  // {
-  //   type: 'input',
-  //   title: '开单时间',
-  //   field: 'createTime',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入开单时间'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '开单人',
-  //   field: 'createUser',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入开单人'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '备注',
-  //   field: 'remark',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入备注'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '仓管',
-  //   field: 'store',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入仓管'
-  //   }
-  // },
-  // {
-  //   type: 'input',
-  //   title: '收货人',
-  //   field: 'revicer',
-  //   props: {
-  //     clearable: true,
-  //     placeholder: '请输入收货人'
-  //   }
-  // }
 ]

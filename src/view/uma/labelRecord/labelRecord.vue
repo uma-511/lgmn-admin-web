@@ -76,13 +76,13 @@ export default {
           title: '订单号',
           key: 'orderNo'
         }, {
-          title: '客户',
+          title: '客户名称',
           key: 'customerName'
         }, {
           title: '产品编号',
           key: 'productName'
         }, {
-          title: '型号',
+          title: '产品名称',
           key: 'modelName'
         }, {
           title: '规格',

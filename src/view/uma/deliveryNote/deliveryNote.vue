@@ -93,7 +93,7 @@ export default {
       formStatus: 'add',
       tableData: [],
       searchForm: [],
-      orders: [{ property: 'createTime', direction: 'DESC' }],
+      orders: [],
       clientList: [{ id: 0, name: '' }],
       currentRecord: {},
       totalCount: 0,
